@@ -20,7 +20,7 @@ github_username: 7uckydog
 # About Section
 about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
-  **시각디자인을 전공한 센스있는 감각적인 개발자 서유빈**입니다.
+  **디자인을 전공한 감각적인 개발자 서유빈**입니다.
 
   Spring & Kotlin 기반의 **환전 및 현금 거래 관련** 백오피스 고도화 및 신규 서비스에 따른 기능 개발을 담당하고 있습니다.
   기존 백오피스에 신규 기능 및 성능 보완을 진행하며 리팩토링 진행에 거침없으며 
@@ -117,10 +117,8 @@ content:
         sub_title: "프리랜서"
         caption: "2020.03 ~ 2021.05"
         link: "https://www.notion.so/a079de4671e54f73893b140756bc5095?pvs=25"
-        link_text: "마케팅 이미지 제작 포트폴리오"
+        link_text: '<span style="background-color: #fefce8; padding: 2px 6px; border-radius: 3px;">마케팅 이미지 제작 포트폴리오</span>'
         description: |
-          <mark style="background-color: #fff9c4; padding: 2px 6px; border-radius: 3px;">✨ Notion 포트폴리오 링크 추가됨</mark>
-
           - 신규 도서 온라인 이벤트 페이지 제작
           - 오프라인 매대 홍보 판넬 이미지 제작
           - 온오프라인 배너 및 POP 제작
@@ -144,12 +142,10 @@ content:
         title: "CPS — 모바일 주문 결제 시스템"
         caption: "2023.02 ~ 현재"
         link: "https://www.notion.so/af5ac3598f9940b0845c619ec1468de7?pvs=25"
-        link_text: "프로젝트 상세 (Notion)"
+        link_text: '<span style="background-color: #fefce8; padding: 2px 6px; border-radius: 3px;">프로젝트 상세 (Notion)</span>'
         quote: >
           카카오 알림톡 / URL & QR을 이용한 가맹점 모바일 주문 결제 서비스
         description: |
-          <mark style="background-color: #fff9c4; padding: 2px 6px; border-radius: 3px;">✨ Notion 상세 페이지 링크 추가됨</mark>
-
           **Tech Stack:** Java8, Spring, JDBC, MyBatis, OracleDB, HTML, CSS, JS, jQuery
 
           가맹점 상품 기반의 단일/그룹 카카오톡 결제 및 URL, QR 결제 기능 개발.
@@ -160,22 +156,16 @@ content:
         title: "KOVANPAY 홈페이지"
         caption: "2023.02 ~ 현재"
         link: "https://www.kovanpay.com/demo/pc"
-        link_text: "데모 페이지 바로가기"
+        link_text: '<span style="background-color: #fefce8; padding: 2px 6px; border-radius: 3px;">데모 페이지 바로가기</span>'
         quote: >
           KOVAN PG 홍보 및 데모 결제 서비스 제공 홈페이지
         description: |
-          <div style="background-color: #fff9c4; padding: 12px; border-radius: 6px;">
-          <strong>✨ 새로 추가된 프로젝트</strong>
-
-          <strong>Tech Stack:</strong> Java8, Spring, JDBC, MyBatis, JPA, MariaDB
+          **Tech Stack:** Java8, Spring, JDBC, MyBatis, JPA, MariaDB
 
           KOVAN PG의 결제 수단별 테스트 결제를 직접 경험할 수 있는 데모 서비스.
-          <ul>
-          <li>테스트/운영 서버 실결제 서비스 연동</li>
-          <li>매일 23:50 실행되는 데모 결제 자동 취소 데몬 (JPA 쿼리 기반)</li>
-          <li>가맹점 환급 수수료 조회 기능 연동</li>
-          </ul>
-          </div>
+          - 테스트/운영 서버 실결제 서비스 연동
+          - 매일 23:50 실행되는 데모 결제 자동 취소 데몬 (JPA 쿼리 기반)
+          - 가맹점 환급 수수료 조회 기능 연동
 
       - layout: left
         title: "MuscleTalkTalk"
@@ -236,10 +226,8 @@ content:
         sub_title: "(디지털 컨버전스) 클라우드 컴퓨팅 웹 융합 응용 SW개발자 양성과정 A"
         caption: "2021.12 ~ 2022.08"
         link: "https://www.notion.so/390959f410d64f058730272476436fb1?pvs=25"
-        link_text: "교육과정 상세 (Notion)"
+        link_text: '<span style="background-color: #fefce8; padding: 2px 6px; border-radius: 3px;">교육과정 상세 (Notion)</span>'
         description: |
-          <mark style="background-color: #fff9c4; padding: 2px 6px; border-radius: 3px;">✨ Notion 교육과정 페이지 링크 추가됨</mark>
-
           Java 풀스택 개발자 과정 수료. 세미/파이널 프로젝트 2개 완성 및 발표.
 
   - title: "외부 활동"
