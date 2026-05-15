@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>서유빈 · 경력기술서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<style>
+  :root{
+    --bg:#FAFAF7;
+    --paper:#FFFFFF;
+    --ink:#15171A;
+    --ink-2:#3F4248;
+    --muted:#7B7E86;
+    --line:#E6E4DE;
+    --line-2:#F0EEE8;
+    --accent:#3FB8BD;
+    --accent-soft:#E8F6F6;
+    --font-kr:"Pretendard Variable","Pretendard",system-ui,-apple-system,sans-serif;
+    --font-en:"Inter","Pretendard Variable",system-ui,sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#111315;
+    --paper:#16191C;
+    --ink:#EEEDE8;
+    --ink-2:#C8C7C2;
+    --muted:#85888E;
+    --line:#262A2E;
+    --line-2:#1E2124;
+    --accent:#6FD9DE;
+    --accent-soft:#1A2A2B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-kr);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-size:15.5px;line-height:1.65;letter-spacing:-0.003em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0B1112}
+
+  /* toolbar */
+  .toolbar{
+    position:fixed;top:18px;right:22px;z-index:50;display:flex;gap:4px;
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:5px;
+  }
+  .toolbar button{
+    border:0;background:transparent;color:var(--ink-2);font-family:var(--font-en);font-size:12.5px;
+    letter-spacing:.02em;padding:7px 14px;border-radius:7px;cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .toolbar button:hover{background:var(--line-2);color:var(--ink)}
+
+  /* page frame */
+  .page{max-width:1040px;margin:0 auto;padding:80px 64px 96px}
+  @media (max-width:760px){.page{padding:56px 24px 80px}}
+
+  /* HERO */
+  .hero{padding-bottom:40px;border-bottom:1px solid var(--line);position:relative}
+  .hero .label{
+    font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .hero .label::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px}
+  .hero .tagline{
+    font-family:var(--font-kr);font-size:16px;font-weight:500;color:var(--ink-2);letter-spacing:-.005em;
+    margin:0 0 14px;line-height:1.5;
+  }
+  .hero .tagline em{font-style:normal;color:var(--ink);font-weight:700;background:var(--accent-soft);padding:1px 6px;border-radius:3px}
+  .hero h1{
+    font-family:var(--font-kr);font-weight:700;font-size:46px;line-height:1.1;letter-spacing:-.025em;margin:0 0 10px;color:var(--ink);
+  }
+  .hero h1 .en{
+    font-family:var(--font-en);font-weight:500;color:var(--muted);font-size:20px;letter-spacing:-.005em;
+    display:inline-block;margin-left:14px;vertical-align:5px;
+  }
+  .hero .role{font-size:16px;color:var(--ink-2);margin:0;line-height:1.6}
+  .hero .role b{color:var(--ink);font-weight:600}
+  .hero .role .pill{
+    display:inline-flex;align-items:center;gap:6px;font-family:var(--font-en);font-size:12px;font-weight:600;
+    color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;letter-spacing:.02em;
+    margin-right:6px;vertical-align:1px;
+  }
+  .hero .role .pill::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+  .hero .contact{
+    margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 28px;
+    font-family:var(--font-en);font-size:14px;
+  }
+  .hero .contact > div{display:flex;align-items:baseline;gap:8px;min-width:0}
+  .hero .contact .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;flex-shrink:0}
+  .hero .contact .v{color:var(--ink);font-weight:500;letter-spacing:-.005em;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
+  .hero .contact .v:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+  /* sections */
+  section{padding:60px 0 8px;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:0}
+  .sec-head{margin-bottom:32px}
+  .sec-head .idx{
+    font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .sec-head .idx::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%}
+  .sec-head h2{
+    font-family:var(--font-kr);font-weight:700;font-size:32px;letter-spacing:-.025em;margin:0;color:var(--ink);line-height:1.2;
+    position:relative;display:inline-block;
+  }
+  .sec-head h2::after{
+    content:"";position:absolute;left:0;bottom:-8px;width:36px;height:3px;background:var(--accent);border-radius:2px;
+  }
+
+  /* ABOUT */
+  .about p{font-size:16px;line-height:1.8;color:var(--ink-2);margin:0 0 16px;max-width:840px}
+  .about p:last-of-type{margin-bottom:0}
+  .about p b{color:var(--ink);font-weight:600;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+  .about .headline{
+    font-family:var(--font-kr);font-weight:700;font-size:24px;letter-spacing:-.02em;line-height:1.35;color:var(--ink);
+    margin:0 0 18px;
+  }
+  .about .headline em{font-style:normal;color:var(--accent);font-weight:700}
+  .about .quote{
+    margin-top:24px;padding:20px 24px;border-left:3px solid var(--accent);
+    background:var(--paper);border-radius:0 12px 12px 0;
+    font-size:15.5px;line-height:1.65;color:var(--ink);font-weight:500;max-width:840px;
+    box-shadow:0 1px 0 var(--line-2);
+  }
+  .about .quote em{font-style:normal;color:var(--accent);font-weight:700}
+
+  /* rows (experience / education) */
+  .row{
+    display:grid;grid-template-columns:160px 1fr;gap:32px;padding:28px 0;border-top:1px dashed var(--line);
+  }
+  .row:first-child{border-top:0;padding-top:0}
+  @media (max-width:760px){.row{grid-template-columns:1fr;gap:10px}}
+  .row .meta{font-family:var(--font-en);font-size:13px;color:var(--muted);line-height:1.55;letter-spacing:.005em}
+  .row .meta .dur{color:var(--ink);font-weight:600;display:block;margin-bottom:3px;font-size:13px}
+  .row .meta .tag{
+    display:inline-block;margin-top:8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:4px;font-weight:600;
+  }
+  .row .body h3{font-family:var(--font-kr);font-weight:700;font-size:20px;letter-spacing:-.015em;margin:0 0 4px;color:var(--ink);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .row .body h3 .ext{font-family:var(--font-en);font-size:12.5px;color:var(--muted);font-weight:400;letter-spacing:.01em}
+  .row .body h3 .ext:hover{color:var(--accent)}
+  .row .body .role{font-size:14.5px;color:var(--accent);font-weight:600;margin:0 0 12px;letter-spacing:.005em;display:flex;align-items:center;gap:8px}
+  .row .body .role::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+  .row .body .lead{font-size:15px;color:var(--ink-2);margin:0 0 16px;line-height:1.6;max-width:700px}
+
+  .block{margin-top:16px}
+  .block h4{font-family:var(--font-kr);font-weight:600;font-size:14.5px;color:var(--ink);margin:0 0 10px;letter-spacing:-.005em}
+  .block ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+  .block ul li{font-size:14.5px;line-height:1.6;color:var(--ink-2);padding-left:16px;position:relative}
+  .block ul li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--muted)}
+  .block ul ul{margin-top:6px}
+  .block ul ul li{font-size:13.5px;color:var(--muted);padding-left:16px}
+  .block ul ul li::before{width:5px;background:var(--line)}
+  .block ul li a{color:var(--accent);border-bottom:1px solid transparent}
+  .block ul li a:hover{border-bottom-color:var(--accent)}
+
+  /* PROJECTS — card grid */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:760px){.proj-grid{grid-template-columns:1fr}}
+  .proj-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 26px;
+    display:flex;flex-direction:column;gap:10px;
+    transition:border-color .2s, transform .2s;
+  }
+  .proj-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .proj-card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .proj-card h3{font-family:var(--font-kr);font-weight:700;font-size:18px;letter-spacing:-.015em;margin:0;color:var(--ink);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .proj-card .meta{font-family:var(--font-en);font-size:11.5px;color:var(--muted);letter-spacing:.04em;white-space:nowrap;text-align:right;display:flex;flex-direction:column;gap:2px}
+  .proj-card .meta .yr{color:var(--ink-2);font-weight:600}
+  .proj-card .desc{font-size:14.5px;line-height:1.6;color:var(--ink-2);margin:0}
+  .proj-card .desc b{color:var(--ink);font-weight:600;background:var(--accent-soft);padding:0 4px;border-radius:2px}
+  .proj-card ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px}
+  .proj-card ul li{font-size:13.5px;color:var(--muted);padding-left:14px;position:relative;line-height:1.55}
+  .proj-card ul li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:1px;background:var(--line)}
+  .proj-card .stack{
+    font-family:var(--font-en);font-size:12px;color:var(--ink-2);margin-top:auto;letter-spacing:.005em;
+    padding-top:14px;border-top:1px dashed var(--line);
+  }
+  .proj-card .stack b{
+    color:var(--muted);font-weight:600;margin-right:8px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;
+  }
+  .proj-card .link{font-family:var(--font-en);font-size:12px;color:var(--accent);border-bottom:1px solid transparent}
+  .proj-card .link:hover{border-bottom-color:var(--accent)}
+
+  /* SKILLS */
+  .skills{display:flex;flex-direction:column;gap:0}
+  .skill-row{
+    display:grid;grid-template-columns:160px 1fr;gap:32px;padding:18px 0;border-top:1px dashed var(--line);align-items:baseline;
+  }
+  .skill-row:first-child{border-top:0;padding-top:0}
+  @media (max-width:760px){.skill-row{grid-template-columns:1fr;gap:6px}}
+  .skill-row h4{font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:600}
+  .skill-row .items{font-size:15px;color:var(--ink);line-height:1.75;letter-spacing:-.005em}
+  .skill-row .items .core{
+    color:var(--ink);font-weight:600;background:var(--accent-soft);padding:2px 8px;border-radius:4px;margin-right:4px;
+    display:inline-block;
+  }
+  .skill-row .items .sep{color:var(--line);margin:0 8px}
+
+  /* EDU CARDS */
+  .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:760px){.edu-grid{grid-template-columns:1fr}}
+  .edu-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 24px;
+  }
+  .edu-card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+  .edu-card h3{font-family:var(--font-kr);font-weight:700;font-size:17px;letter-spacing:-.015em;margin:0;color:var(--ink)}
+  .edu-card .when{font-family:var(--font-en);font-size:11.5px;color:var(--muted);letter-spacing:.04em;white-space:nowrap;font-weight:500}
+  .edu-card .role{font-size:13.5px;color:var(--accent);font-weight:600;margin:0 0 8px}
+  .edu-card p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.6}
+
+  /* FOOTER */
+  .foot{
+    margin-top:64px;padding-top:28px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:var(--font-en);font-size:12.5px;color:var(--muted);
+  }
+  .foot b{color:var(--ink);font-weight:600;font-family:var(--font-kr)}
+
+  /* print */
+  @media print{
+    .toolbar{display:none!important}
+    body{background:#fff;color:#000;font-size:10.5pt}
+    .page{padding:24px 32px;max-width:none}
+    .hero h1{font-size:36pt}
+    section{padding:22px 0;page-break-inside:auto;border-color:#ccc}
+    .row,.proj{break-inside:avoid}
+    .hero .contact{break-inside:avoid}
+  }
+</style>
+</head>
+<body style="background-color: rgb(255, 255, 255); font-size: 15px">
+
+<div class="toolbar" role="toolbar" aria-label="page tools">
+  <button id="theme-btn" type="button">Theme</button>
+  <button id="print-btn" type="button">PDF / Print</button>
+</div>
+
+<main class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="label">경력기술서 · Curriculum Vitae</div>
+    <p class="tagline">시각디자인을 전공한 <em>센스있는 개발자</em></p>
+    <h1 style="font-size: 20px">서유빈<span class="en">Seo Yubin</span></h1>
+    <p class="role"><span class="pill">Backend · Web</span><b>Spring & Kotlin</b> 기반 환전 · 현금 거래 · 결제 도메인의 백오피스를 만듭니다.</p>
+
+    <div class="contact">
+      <div><span class="k">Email</span><a class="v" href="mailto:dbqls7781@gmail.com">dbqls7781@gmail.com</a></div>
+      <div><span class="k">Phone</span><a class="v" href="tel:+821082877781">010-8287-7781</a></div>
+      <div><span class="k">GitHub</span><a class="v" href="https://github.com/7uckydog" target="_blank" rel="noopener">github.com/7uckydog</a></div>
+      <div><span class="k">Web</span><a class="v" href="https://7uckydog.github.io" target="_blank" rel="noopener">7uckydog.github.io</a></div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-head">
+      <div class="idx">01 · About</div>
+      <h2 style="font-size: 28px">소개</h2>
+    </div>
+    <div class="about">
+      <h3 class="headline" style="font-size: 22px">디자이너의 눈으로<br><em style="font-size: 22px">시스템을 설계합니다.</em></h3>
+      <p><b>Spring & Kotlin</b> 기반의 환전 및 현금 거래 관련 백오피스 고도화와 신규 서비스에 따른 기능 개발을 담당하고 있습니다. 기존 백오피스에 신규 기능 및 성능 보완을 진행하며 리팩토링에 거침없으며, 키오스크 내 지속적인 신규 거래 유형이 추가됨에 따라 빠른 환경 적응 및 플로우 파악에 익숙해져 있습니다.</p>
+      <p>시각디자인을 전공함으로써 <b>UI/UX 감각</b>을 갖추고 있어, 기획자·디자이너와의 소통이 유연하며 다양한 관점에서 기능을 살피는 시야를 가지고 있습니다.</p>
+      <div class="quote">“코드를 짜기 전에 흐름을 그립니다. 화면, 데이터, 사람을 같은 캔버스에 올려놓고 보면 더 단단한 서비스가 나온다고 믿습니다.”</div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec-head">
+      <div class="idx">02 · Experience</div>
+      <h2 style="font-size: 28px">경력</h2>
+    </div>
+
+    <div class="xp">
+
+      <article class="row">
+        <div class="meta">
+          <span class="dur">2024.07 — 현재</span>
+          <span>1년 10개월</span>
+          <span class="tag">현재</span>
+        </div>
+        <div class="body">
+          <h3>(주)더즌<a class="ext" href="https://www.dozn.co.kr" target="_blank" rel="noopener">dozn.co.kr ↗</a></h3>
+          <p class="role">키오스크 개발팀 매니저</p>
+          <p class="lead">환전 및 현금성 거래 제공 — BackOffice 고도화 / 홈페이지 / 대시보드 개발</p>
+
+          <div class="block">
+            <h4>환전 고도화 BackOffice</h4>
+            <ul>
+              <li>고도화·고객사·현송사 어드민 백오피스 고도화 및 신규 기능 개발
+                <ul>
+                  <li>키오스크 실시간 시재(원화·외화·선불 카드) 관리 및 금고 관리</li>
+                  <li>현송 업체 BO 연동 — 실시간 현금 수송 요청 및 수거·장입 데이터 확인</li>
+                  <li>나이스 택스리펀드, eZL 교통카드 충전·출금 거래 내역 기반 정산 & 대사 & 자동 송금</li>
+                  <li>엑셀 업·다운로드를 통한 은행 매입/매각 데이터 관리</li>
+                  <li>UNIT 생성을 통한 키오스크 매핑 및 실시간 재고 관리</li>
+                  <li>스프레드, 여권 인증 이벤트, 프로모션, 거래 데이터 관리</li>
+                </ul>
+              </li>
+              <li>현송 업체용 BO 신규 런칭 — 작업 확정·회수·장입 데이터 입력 및 실시간 시재 validation</li>
+              <li>내부 어드민 유지보수 및 신규 기능 개발 — 가맹점/상점 정보 관리 고도화, 신규 거래 유형 대응</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h4>홈페이지 고도화 및 유지보수</h4>
+            <ul>
+              <li>홈페이지 UI 고도화하여 <a href="https://mx-dozn.co.kr/ko" target="_blank" rel="noopener">신규 홈페이지 런칭 ↗</a> (Claude 활용 바이브 코딩)</li>
+              <li>기존 홈페이지 API의 version up — 더프리(더즌 환전 앱) API 제공</li>
+              <li>이벤트 팝업 관리</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h4>대시보드 고도화 및 유지보수</h4>
+            <ul>
+              <li>Chart.js 기반 실시간 일별 거래 현황 (거래·키오스크·국적·통화별)</li>
+              <li>거래별 고도화 대시보드 페이지 제공</li>
+              <li>실시간 키오스크 상태 관리 및 조회 페이지 제공</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta">
+          <span class="dur">2023.02 — 2024.05</span>
+          <span>1년 3개월</span>
+        </div>
+        <div class="body">
+          <h3>(주)코밴 KOVAN<a class="ext" href="https://www.kovan.co.kr" target="_blank" rel="noopener">kovan.co.kr ↗</a></h3>
+          <p class="role">PG연구개발팀 연구원</p>
+          <p class="lead">VAN / PG(결제대행) 전문 기업 — BackOffice 및 홈페이지 유지보수, 신규 개발</p>
+
+          <div class="block">
+            <h4>PG BackOffice</h4>
+            <ul>
+              <li>관리자·가맹점·리셀러 백오피스 유지보수 및 기능 개선</li>
+              <li>거래 내역 조회 슬로우 쿼리 개선 (union 쿼리 개선)</li>
+              <li>PG 거래 내역 기반 BC(UPOP) & 카카오 거래 대사 및 정산 기능 개발</li>
+              <li>더존 & 팝빌 세금계산서·인증서 조회, 담당자 등록 기능 개발</li>
+              <li>엑셀 업로드 기반 가맹점 환급 수수료 등록/조회 페이지 개발</li>
+              <li>카카오 신용 매출 전표 UI 개선 (Iframe 활용)</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h4>CPS — 가맹점 모바일 주문 결제 시스템</h4>
+            <ul>
+              <li>카카오 알림톡 단일·그룹 결제 기능 개발</li>
+              <li>URL & QR 결제 기능 개발 (Canvas 이용 QR 이미지 생성)</li>
+              <li>결제 확인 페이지 한/영 다국어 지원 및 실시간 유효시간 타이머 구현</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h4>PG 결제 / KOVANPAY / 기타</h4>
+            <ul>
+              <li>결제창 웹 접근성 개선 (tabindex, aria-expanded 설정)</li>
+              <li>KMPI, NOTI 유지보수, Paypal 결제 취소 기능 개발 (Paypal API 연동)</li>
+              <li>홈페이지 테스트 결제 자동 취소 스케줄러 개발</li>
+              <li>WEB & WAS 자동 START/STOP 스크립트, 디스크 모니터링, SVN·Jenkins 운영</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta">
+          <span class="dur">2021.02 — 2021.08</span>
+          <span>7개월</span>
+        </div>
+        <div class="body">
+          <h3>(주)리어스</h3>
+          <p class="role">마케팅영업팀 사원</p>
+          <div class="block">
+            <ul>
+              <li>네이버 쇼핑·무신사·쿠팡·와디즈 마케팅 및 판매 기획 수립</li>
+              <li>오픈마켓 기획전 구상, SNS 배너·썸네일 이미지 제작</li>
+              <li>네이버 스토어용 상세 페이지 및 이미지 콘텐츠 제작</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta">
+          <span class="dur">2020.03 — 2021.05</span>
+          <span>프리랜서</span>
+        </div>
+        <div class="body">
+          <h3>한빛비즈(주)</h3>
+          <p class="role">프리랜서 디자이너</p>
+          <div class="block">
+            <ul>
+              <li>신규 도서 온라인 이벤트 페이지 제작</li>
+              <li>오프라인 매대 홍보 판넬 이미지 제작</li>
+              <li>온오프라인 배너 및 POP 제작</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head">
+      <div class="idx">03 · Projects</div>
+      <h2 style="font-size: 28px">프로젝트</h2>
+    </div>
+
+    <div class="proj-grid">
+
+      <article class="proj-card">
+        <div class="top">
+          <h3>PG BackOffice</h3>
+          <div class="meta"><span class="yr">2023.02 — 2024.05</span><span>(주)코밴</span></div>
+        </div>
+        <p class="desc">현업·가맹점·리셀러를 위한 <b>PG 통합 관리 서비스</b>. 카카오·BC·더존·팝빌·Paypal 등 외부 API 연동으로 결제 검증 및 세금계산서 발행, 슬로우 쿼리 개선으로 조회 성능 향상.</p>
+        <div class="stack"><b>Stack</b>Java 8 · Spring Boot · MyBatis · Informix · jQuery · Jenkins</div>
+      </article>
+
+      <article class="proj-card">
+        <div class="top">
+          <h3>CPS — 모바일 주문 결제 시스템</h3>
+          <div class="meta"><span class="yr">2023.02 — 03</span><span>(주)코밴</span></div>
+        </div>
+        <p class="desc">카카오 알림톡 / URL & QR 기반 <b>가맹점 모바일 주문 결제 서비스</b>. 가맹점 1:N 모바일 주문 테이블 설계.</p>
+        <ul>
+          <li>배치를 활용한 알림톡 발송, Canvas 이용 QR 이미지 생성</li>
+          <li>jqGrid 기반 통합 조회 페이지</li>
+        </ul>
+        <div class="stack"><b>Stack</b>Java 8 · Spring · MyBatis · OracleDB · jQuery</div>
+      </article>
+
+      <article class="proj-card">
+        <div class="top">
+          <h3>KOVANPAY 홈페이지 <a class="link" href="https://www.kovanpay.com/demo/pc" target="_blank" rel="noopener">데모 ↗</a></h3>
+          <div class="meta"><span class="yr">2023.02 — 현재</span><span>(주)코밴</span></div>
+        </div>
+        <p class="desc">KOVAN PG 홍보 및 데모 결제 서비스 제공 홈페이지. 결제 수단별 테스트 결제를 직접 경험할 수 있는 데모 서비스.</p>
+        <ul>
+          <li>매일 23:50 실행되는 JPA 기반 데모 결제 자동 취소 데몬</li>
+          <li>가맹점 환급 수수료 조회 기능 연동</li>
+        </ul>
+        <div class="stack"><b>Stack</b>Java 8 · Spring · JPA · MyBatis · MariaDB</div>
+      </article>
+
+      <article class="proj-card">
+        <div class="top">
+          <h3>WCW — 기업용 협업툴 <a class="link" href="https://github.com/7uckydog/WCW" target="_blank" rel="noopener">github ↗</a></h3>
+          <div class="meta"><span class="yr">2022.06 — 08</span><span>파이널</span></div>
+        </div>
+        <p class="desc">전자결재 / 직원·부서 관리 기능을 갖춘 기업용 협업 서비스.</p>
+        <ul>
+          <li>Spring 스케줄러 활용 전자결재 자동 부결 (14일)</li>
+          <li>결재자 직급 순서 자동 검증 및 서명 등록</li>
+          <li>Cloudinary + Canvas 전자서명 등록·수정</li>
+          <li>임의 패스워드 이메일 자동 발송</li>
+        </ul>
+        <div class="stack"><b>Stack</b>Java · Spring · Oracle · HTML · CSS · JS</div>
+      </article>
+
+      <article class="proj-card">
+        <div class="top">
+          <h3>MuscleTalkTalk <a class="link" href="https://github.com/7uckydog/MuscleTalkTalk" target="_blank" rel="noopener">github ↗</a></h3>
+          <div class="meta"><span class="yr">2022.03 — 05</span><span>세미</span></div>
+        </div>
+        <p class="desc">운동인을 위한 커뮤니티 & PT 예약 서비스.</p>
+        <ul>
+          <li>정규표현식 기반 유효성 검사 + SMTP / SHA256 이메일 인증</li>
+          <li>Cloudinary 이용 프로필 / 트레이너 인증 이미지 업로드</li>
+          <li>Oracle 프로시저 + 스케줄러 — PT 예약 연동 자동 탈퇴</li>
+        </ul>
+        <div class="stack"><b>Stack</b>Java · Oracle · HTML · CSS · JS</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head">
+      <div class="idx">04 · Skills</div>
+      <h2 style="font-size: 28px">기술 스택</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-row">
+        <h4>Backend</h4>
+        <div class="items">
+          <span class="core">Kotlin</span><span class="core">Java</span><span class="core">Spring</span><span class="core">Spring Boot</span>
+          Maven<span class="sep">·</span>JDBC<span class="sep">·</span>MyBatis<span class="sep">·</span>JPA<span class="sep">·</span>Querydsl<span class="sep">·</span>Hibernate
+        </div>
+      </div>
+      <div class="skill-row">
+        <h4>Frontend</h4>
+        <div class="items">React<span class="sep">·</span>HTML<span class="sep">·</span>CSS<span class="sep">·</span>JavaScript<span class="sep">·</span>jQuery<span class="sep">·</span>Ajax<span class="sep">·</span>JSP</div>
+      </div>
+      <div class="skill-row">
+        <h4>Database</h4>
+        <div class="items">MySQL<span class="sep">·</span>Oracle<span class="sep">·</span>Informix<span class="sep">·</span>MariaDB</div>
+      </div>
+      <div class="skill-row">
+        <h4>DevOps</h4>
+        <div class="items">SVN<span class="sep">·</span>Git<span class="sep">·</span>Jenkins<span class="sep">·</span>Linux Shell Script<span class="sep">·</span>IntelliJ<span class="sep">·</span>VS Code</div>
+      </div>
+      <div class="skill-row">
+        <h4>Design</h4>
+        <div class="items">Adobe Photoshop<span class="sep">·</span>Illustrator<span class="sep">·</span>InDesign</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head">
+      <div class="idx">05 · Education</div>
+      <h2 style="font-size: 28px">교육 & 활동</h2>
+    </div>
+    <div class="edu-grid">
+      <article class="edu-card">
+        <div class="top">
+          <h3>KH정보교육원 강남</h3>
+          <span class="when">2021.12 — 2022.08</span>
+        </div>
+        <div class="role">클라우드 컴퓨팅 웹 융합 응용 SW개발자 양성과정 A</div>
+        <p>Java 풀스택 개발자 과정 수료. 세미 / 파이널 프로젝트 2개 완성 및 발표.</p>
+      </article>
+      <article class="edu-card">
+        <div class="top">
+          <h3>ORACLE KOREA 연말 세미나</h3>
+          <span class="when">2023.11.23</span>
+        </div>
+        <div class="role">외부 활동</div>
+        <p>오라클 전반 시스템 점검 및 향후 추진 계획 파악.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div><b>서유빈</b> · 경력기술서</div>
+    <div>References on request</div>
+  </footer>
+
+</main>
+
+<script>
+  const themeBtn = document.getElementById('theme-btn');
+  if(localStorage.getItem('cv-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.dataset.theme;
+    if(cur === 'dark'){ delete document.documentElement.dataset.theme; localStorage.setItem('cv-theme','light'); }
+    else { document.documentElement.dataset.theme = 'dark'; localStorage.setItem('cv-theme','dark'); }
+  });
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
+</script>
+</body>
+</html>
+
+<style id="__om-edit-overrides">
+:is(h1,h2,h3,h4,h5,h6) >span:nth-child(1) { font-size: 32px !important }
+:is(h1,h2,h3,h4,h5,h6) >span:nth-child(1) { font-size: 3px !important }
+</style>
