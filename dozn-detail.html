@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>서유빈 · DOZN 상세 경력기술서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<style>
+  :root{
+    --bg:#FAFAF7;
+    --paper:#FFFFFF;
+    --ink:#15171A;
+    --ink-2:#3F4248;
+    --muted:#7B7E86;
+    --line:#E6E4DE;
+    --line-2:#F0EEE8;
+    --accent:#3FB8BD;
+    --accent-soft:#E8F6F6;
+    --font-kr:"Pretendard Variable","Pretendard",system-ui,-apple-system,sans-serif;
+    --font-en:"Inter","Pretendard Variable",system-ui,sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#111315;
+    --paper:#16191C;
+    --ink:#EEEDE8;
+    --ink-2:#C8C7C2;
+    --muted:#85888E;
+    --line:#262A2E;
+    --line-2:#1E2124;
+    --accent:#6FD9DE;
+    --accent-soft:#1A2A2B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-kr);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-size:15.5px;line-height:1.7;letter-spacing:-0.003em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0B1112}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.is-in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{transition:none!important;animation:none!important}
+  }
+
+  /* toolbar */
+  .toolbar{
+    position:fixed;top:18px;right:22px;z-index:50;display:flex;gap:4px;
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:5px;
+  }
+  .toolbar button, .toolbar a{
+    border:0;background:transparent;color:var(--ink-2);font-family:var(--font-en);font-size:12.5px;
+    letter-spacing:.02em;padding:7px 14px;border-radius:7px;cursor:pointer;
+    transition:background .2s, color .2s, transform .2s;text-decoration:none;
+  }
+  .toolbar button:hover, .toolbar a:hover{background:var(--line-2);color:var(--ink);transform:translateY(-1px)}
+
+  /* page */
+  .page{max-width:920px;margin:0 auto;padding:80px 64px 96px}
+  @media (max-width:760px){.page{padding:56px 24px 80px}}
+
+  /* back link */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--font-en);font-size:12.5px;
+    color:var(--muted);letter-spacing:.02em;margin-bottom:24px;font-weight:500;transition:color .2s, transform .2s;
+  }
+  .back:hover{color:var(--accent);transform:translateX(-2px)}
+  .back::before{content:"←";font-size:14px}
+
+  /* HERO */
+  .hero{padding-bottom:36px;border-bottom:1px solid var(--line);margin-bottom:48px}
+  .hero .label{
+    font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    margin-bottom:18px;display:flex;align-items:center;gap:10px;font-weight:600;
+  }
+  .hero .label::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px}
+  .hero h1{
+    font-family:var(--font-kr);font-weight:700;font-size:36px;line-height:1.15;letter-spacing:-.025em;margin:0 0 12px;color:var(--ink);
+  }
+  .hero .lead{font-size:16.5px;color:var(--ink-2);margin:0 0 22px;line-height:1.65;max-width:760px}
+  .hero .lead b{color:var(--ink);font-weight:600;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+  .hero .meta-line{
+    display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--font-en);font-size:13px;color:var(--muted);
+    padding-top:18px;border-top:1px dashed var(--line);
+  }
+  .hero .meta-line > div{display:flex;align-items:baseline;gap:8px}
+  .hero .meta-line .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .hero .meta-line .v{color:var(--ink);font-weight:500}
+
+  /* sections */
+  .case{padding:48px 0 8px;border-bottom:1px solid var(--line)}
+  .case:last-of-type{border-bottom:0}
+  .case .head{margin-bottom:24px}
+  .case .case-no{
+    font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;
+  }
+  .case .case-no::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px}
+  .case h2{
+    font-family:var(--font-kr);font-weight:700;font-size:28px;letter-spacing:-.025em;margin:0;color:var(--ink);line-height:1.25;
+    position:relative;display:inline-block;
+  }
+  .case h2::after{
+    content:"";position:absolute;left:0;bottom:-8px;width:36px;height:3px;background:var(--accent);border-radius:2px;
+    transform-origin:left;transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .case.is-in h2::after{transform:scaleX(1)}
+
+  .case h3{
+    font-family:var(--font-kr);font-weight:700;font-size:18px;letter-spacing:-.015em;margin:36px 0 14px;color:var(--ink);
+    display:flex;align-items:center;gap:10px;
+  }
+  .case h3::before{
+    content:"";width:14px;height:2px;background:var(--accent);border-radius:1px;display:inline-block;
+  }
+
+  .case p{font-size:15.5px;line-height:1.85;color:var(--ink-2);margin:0 0 14px;max-width:760px}
+  .case p b{color:var(--ink);font-weight:600}
+  .case p em{font-style:normal;color:var(--ink);font-weight:600;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+
+  /* problem/solution cards */
+  .case-list{margin:0 0 16px;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:760px}
+  .case-list li{
+    background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);
+    padding:14px 18px;border-radius:0 10px 10px 0;font-size:14.5px;line-height:1.65;color:var(--ink-2);
+    transition:border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .case-list li:hover{
+    border-color:var(--line);border-left-color:var(--accent);transform:translateX(3px);
+    box-shadow:0 6px 16px -8px rgba(63,184,189,.25);
+  }
+  .case-list li b{color:var(--ink);font-weight:700;display:block;margin-bottom:3px;font-size:14.5px}
+  .case-list li b + span{color:var(--ink-2)}
+
+  /* outcome box */
+  .outcome{
+    margin-top:24px;padding:20px 24px;background:var(--paper);border-radius:12px;
+    border:1px solid var(--line);position:relative;max-width:760px;
+  }
+  .outcome::before{
+    content:"OUTCOME";position:absolute;top:-9px;left:18px;
+    font-family:var(--font-en);font-size:10px;letter-spacing:.22em;font-weight:700;color:var(--accent);
+    background:var(--bg);padding:2px 10px;border-radius:4px;
+  }
+  .outcome p{margin:0;font-size:15px;line-height:1.7;color:var(--ink)}
+  .outcome p em{font-style:normal;color:var(--accent);font-weight:700;background:transparent;padding:0}
+
+  /* nav between cases */
+  .case-divider{
+    margin:48px 0 0;text-align:center;font-family:var(--font-en);font-size:11px;letter-spacing:.32em;color:var(--muted);
+  }
+  .case-divider span{display:inline-block;padding:0 12px;background:var(--bg);position:relative;z-index:1}
+  .case-divider{position:relative}
+  .case-divider::before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:var(--line)}
+
+  /* footer */
+  .foot{
+    margin-top:64px;padding-top:28px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:var(--font-en);font-size:12.5px;color:var(--muted);
+  }
+  .foot b{color:var(--ink);font-weight:600;font-family:var(--font-kr)}
+
+  @media print{
+    .toolbar,.back{display:none!important}
+    body{background:#fff;color:#000;font-size:10.5pt}
+    .page{padding:24px 32px;max-width:none}
+    .hero h1{font-size:28pt}
+    .case{padding:20px 0;page-break-inside:auto;border-color:#ccc}
+    .case-list li,.outcome{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="toolbar" aria-label="page tools">
+  <a href="index.html" title="목록으로">목록</a>
+  <button id="theme-btn" type="button">Theme</button>
+  <button id="print-btn" type="button">PDF / Print</button>
+</div>
+
+<main class="page">
+
+  <a class="back" href="index.html">경력기술서로 돌아가기</a>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="label">상세 경력기술서 · Case Study</div>
+    <h1>DOZN BackOffice</h1>
+    <p class="lead">사람 손을 타던 <b>키오스크 운영 · 정산 · 모니터링 업무</b>를 도메인 모델로 재설계해 시스템 안으로 옮겨 놓은 이야기. 운영팀·재무팀·경영진이 같은 데이터를 보고 움직일 수 있는 기반을 만들었습니다.</p>
+    <div class="meta-line">
+      <div><span class="k">Company</span><span class="v">(주)더즌 DOZN</span></div>
+      <div><span class="k">Role</span><span class="v">키오스크 개발팀 매니저</span></div>
+      <div><span class="k">Period</span><span class="v">2024.07 — 현재</span></div>
+      <div><span class="k">Stack</span><span class="v">Kotlin · Spring Boot · JPA · Querydsl · MariaDB</span></div>
+    </div>
+  </header>
+
+  <!-- CASE 1 -->
+  <section class="case">
+    <div class="head">
+      <div class="case-no">Case 01</div>
+      <h2>자산 이동 워크플로우 시스템화</h2>
+    </div>
+
+    <h3>문제 상황</h3>
+    <p>키오스크 현금 보충·회수·재배치 등 현물 자산이 움직이는 업무가 시스템 없이 사람 간 커뮤니케이션에 의존하고 있었습니다. 운영 관리자가 이메일과 유선으로 수송을 지시하고, 작업 결과는 엑셀에 수기로 정리해 공유하는 구조였기 때문에 <b>업무 흐름이 시스템 바깥에 존재하는 상태</b>였습니다.</p>
+    <p>이로 인해 다음과 같은 문제가 반복적으로 발생했습니다.</p>
+    <ul class="case-list">
+      <li><b>현금 수송 요청 누락</b><span>구두·이메일 지시 특성상 수신자가 인지하지 못한 채 지나가는 케이스가 있었고, 누락 사실은 추후 시재가 안 맞을 때야 발견되는 경우가 많았습니다.</span></li>
+      <li><b>데이터 대사 불일치</b><span>운영팀 엑셀, 재무팀 엑셀, 어드민 데이터가 각각 따로 관리되다 보니 같은 건이 서로 다르게 기록되는 일이 잦았습니다.</span></li>
+      <li><b>담당자 부재 시 소통 단절</b><span>특정 담당자만 맥락을 알고 있는 작업이 많아서, 휴가나 외근으로 부재할 경우 작업이 멈추거나 잘못된 정보로 진행되는 휴먼 에러가 발생했습니다.</span></li>
+      <li><b>전체 흐름 가시성 부재</b><span>어떤 키오스크에 어떤 작업이 어느 단계까지 진행됐는지 한 화면에서 볼 수 없어서, 작업자가 매번 개별로 상태를 확인해야 하는 비효율이 누적됐습니다.</span></li>
+    </ul>
+
+    <h3>해결 과정</h3>
+    <p>먼저 자산 운영 관리자, 재무팀과 함께 실제 현금 수송이 어떤 순서로 일어나고, 각 단계에서 누가 무엇을 결정하며, 어떤 예외 케이스(긴급 보충, 회수, 점검 동반 작업 등)가 있는지를 정리했습니다.</p>
+    <p>이렇게 정리한 흐름을 바탕으로 <b>자산 이동 작업의 생명주기를 도메인 모델로 정의</b>하고, 다음과 같은 규칙을 도메인 레이어에 응집시켰습니다.</p>
+    <ul class="case-list">
+      <li><b>상태 전이 규칙</b><span>요청 → 수락 → 진행 → 완료 → 대사 확정으로 이어지는 단계 사이에 허용되는 전이만 명시적으로 정의하고, 비정상적인 상태 점프는 도메인 차원에서 차단했습니다.</span></li>
+      <li><b>정합성 검증 로직</b><span>키오스크 시재, 운영팀 보유 현금, 송금/입금 데이터와의 정합성 검사를 한 곳에 응집시켜서, 동일한 검증 로직이 여러 레이어에 흩어져 중복되는 문제를 없앴습니다.</span></li>
+      <li><b>작업 단위 이력화</b><span>요청, 수락, 연락, 메모, 대사, 작업 정보 입력 등 모든 액션을 작업 단위로 이력화해 사후 추적이 가능하도록 설계했습니다.</span></li>
+    </ul>
+    <p>그 위에 UI를 얹어서 수송 사이클 전체를 시각화했고, 단계가 바뀔 때마다 관련 담당자에게 자동 이메일 알림이 가도록 했습니다. <em>담당자가 부재여도 작업이 멈추지 않고 인계될 수 있는 구조</em>를 만든 거죠.</p>
+    <p>특히 기존에 따로 관리되던 사내 보유 시재와 키오스크 실시간 시재 정보에 이 모듈을 연결한 부분이 중요했습니다. 자산 이동이 별개 기능이 아니라 회사 전체 자산 흐름의 한 축이 되도록 묶었고, 그 결과 운영팀과 재무팀이 같은 데이터를 보고 의사결정할 수 있는 기준이 만들어졌습니다.</p>
+
+    <div class="outcome">
+      <p>도입 이후 <em>수송 요청 누락이 거의 사라졌고</em>, 월말 시재 대사에 들어가던 시간이 많이 줄었습니다.</p>
+    </div>
+  </section>
+
+  <!-- CASE 2 -->
+  <section class="case">
+    <div class="head">
+      <div class="case-no">Case 02</div>
+      <h2>나이스 · 이즐(eZL) 정산 자동화</h2>
+    </div>
+
+    <h3>문제 상황</h3>
+    <p>재무팀의 정산·대사 업무는 회사 현금 흐름과 직접 연결되는 핵심 프로세스인데, 거의 전적으로 수작업에 의존하고 있었습니다. 연동 업체가 매일 올려주는 대사 파일을 담당자가 직접 받아서, 어드민에 쌓인 거래 내역과 한 건씩 눈으로 비교한 뒤 수기로 송금하는 구조였어요.</p>
+    <p>이 구조는 단순히 느린 차원을 넘어 다음과 같은 리스크를 안고 있었습니다.</p>
+    <ul class="case-list">
+      <li><b>휴먼 에러 누적</b><span>거래 건수가 늘수록 수기 비교 과정에서 발생하는 누락·중복·오매칭이 비례해서 늘었습니다.</span></li>
+      <li><b>담당자 부재 시 대사 지연</b><span>대사 업무가 특정 담당자에게 몰려 있어서 부재 시 정산이 하루 이상 밀리는 일이 잦았습니다.</span></li>
+      <li><b>누적 데이터 관리의 비효율</b><span>일별 엑셀이 매일 새로 만들어지면서 누적 통계나 과거 시점 추적이 어려워, 지난 기간 데이터를 다시 보는 데 상당한 비용이 들었습니다.</span></li>
+      <li><b>업체별 정산 방식의 비표준성</b><span>가장 큰 난점이었습니다. 일반 승인 거래 외에 당일 승인 취소, 사후 매입 취소, 상계 처리, 수수료 차감 방식 등이 업체마다 달랐는데, 이게 시스템화되어 있지 않아서 계약서 원문이나 과거 이메일 협의 이력을 다시 찾아야 정상 대사가 가능했습니다.</span></li>
+    </ul>
+
+    <h3>해결 과정</h3>
+    <p>영업팀, 재무팀과 함께 업체별 정산·대사 프로세스를 처음부터 다시 분해했습니다. 계약서, 운영 메모, 과거 이슈 이력에 흩어져 있던 룰을 한곳에 모아 <b>업체별로 정형화된 규칙 셋</b>으로 재정의했고, 이를 기반으로 자동 대사·송금 파이프라인을 설계했습니다.</p>
+    <p>주요 구성은 다음과 같습니다.</p>
+    <ul class="case-list">
+      <li><b>스케줄링 기반 자동 처리</b><span>일일 대사, 주간 대사, 거래 단위 대사 등 업체별 정산 주기에 맞춰 스케줄러로 자동 실행되도록 구성했습니다. 정상 케이스는 사람 손 안 타고 끝까지 처리되는 게 기본값입니다.</span></li>
+      <li><b>원본 데이터 보존</b><span>업체에서 받은 파일 원본을 그대로 저장하는 단계, 정규화된 대사용 데이터로 변환하는 단계, 사내 거래 데이터와 비교한 결과를 보관하는 단계를 분리했습니다. 추후 분쟁이 생겼을 때 업체가 보낸 원본을 그대로 확인할 수 있도록 보장하기 위함이었습니다.</span></li>
+      <li><b>불일치 슬랙 알림</b><span>대사 불일치가 발생하면 즉시 슬랙으로 상세 내용을 보내서, 재무팀과 영업팀이 같은 채널에서 빠르게 확인하고 처리할 수 있게 했습니다. "문제가 있다는 사실 자체를 며칠 뒤에야 아는" 상황을 없앴습니다.</span></li>
+      <li><b>백오피스 조회 기능</b><span>누적 정산·대사 데이터를 백오피스에서 실시간으로 볼 수 있게 해서, 별도 엑셀 없이 임의 기간·업체·거래 유형으로 조회할 수 있게 했습니다.</span></li>
+      <li><b>확정 · 송금 분리 로직</b><span>자동 대사를 통과한 건이라도 바로 송금되지 않고, 재무팀의 명시적 확정 액션이 있어야 송금되도록 분리했습니다. 자동화의 편의성과 자금 집행 통제권 사이에서 균형을 잡기 위해 의도적으로 나눈 설계입니다.</span></li>
+    </ul>
+
+    <div class="outcome">
+      <p>도입 후 정산 업무가 특정 담당자에게 묶이지 않게 됐고, 불일치 발견 시점이 "월말 정리 중"에서 <em>"당일 슬랙 알림"</em>으로 앞당겨졌습니다. 재무팀이 단순 비교 작업에서 벗어나 예외 케이스 판단·협의 같은 사람이 해야 할 일에 집중할 수 있게 됐습니다.</p>
+    </div>
+  </section>
+
+  <!-- CASE 3 -->
+  <section class="case">
+    <div class="head">
+      <div class="case-no">Case 03</div>
+      <h2>실시간 대시보드 개발</h2>
+    </div>
+
+    <h3>문제 상황</h3>
+    <p>기존 백오피스에 거래 내역, 키오스크 상태, 환율·스프레드, 경쟁사 데이터가 다 있긴 했지만, <b>각 정보가 별도 페이지에 흩어져 있는 구조</b>였습니다. 데이터는 있는데 한눈에 볼 수 있는 화면이 없는 상태였어요.</p>
+    <p>그래서 회계팀이 매일 다음 작업을 반복하고 있었습니다.</p>
+    <ul class="case-list">
+      <li><b>1. 페이지 순차 진입</b><span>백오피스 여러 페이지에 순차적으로 들어가 데이터를 확인.</span></li>
+      <li><b>2. 다축 조회 · 다운로드</b><span>일별·통화별·국가별·키오스크별 거래 내역을 각각 조회하고 다운로드.</span></li>
+      <li><b>3. 엑셀 가공</b><span>받은 엑셀을 가공·조합해서 일일 리포트로 정리.</span></li>
+      <li><b>4. 이메일 발송</b><span>정리된 리포트를 이메일로 사내에 발송.</span></li>
+    </ul>
+    <p>리포트는 매일 만들어졌지만 <b>실시간성이 없다는 점</b>이 가장 큰 한계였습니다. 운영 중 이슈가 생기면 결국 백오피스를 다시 열어 여러 페이지를 오가며 확인해야 했고, 회계팀에 별도 요청을 보내는 일이 잦았습니다.</p>
+
+    <h3>해결 과정</h3>
+    <p>서비스 기획팀과 함께 사용자별(회계팀·운영팀·경영진) 정보 니즈를 정리하고, <b>어떤 데이터가 한 화면에 같이 있어야 의미가 있는지</b>부터 정의했습니다. 이후 백오피스 파트 내에서 도메인 단위로 업무를 분할해 다음 영역을 구성했습니다.</p>
+    <ul class="case-list">
+      <li><b>거래 유형별 실시간 현황</b><span>원화·외화 거래, 카드 구매·충전·출금, 택스리펀드를 축으로 두고 각 축별 거래 현황을 실시간으로 시각화. 같은 "거래"지만 비즈니스적으로 성격이 전혀 다른 흐름을 사용자가 직관적으로 분리해서 볼 수 있게 한 게 핵심이었습니다.</span></li>
+      <li><b>토탈 키오스크 실시간 현황 및 알림</b><span>전국에 분산된 키오스크의 상태(정상·이슈·점검 등)와 알림 이력을 한 화면에 모았습니다. 운영팀이 별도 모니터링 도구 없이 이상 징후를 바로 확인할 수 있게 했습니다.</span></li>
+      <li><b>경쟁사 환율 비교</b><span>사내 환율과 스프레드 데이터를 기준으로 경쟁사 환율을 함께 조회할 수 있는 기능. 단순 모니터링을 넘어 환율 정책 의사결정에 직접 활용되는 부분이었습니다.</span></li>
+    </ul>
+    <p>기술적으로는 <em>실시간 소켓 통신과 폴링을 혼합</em>해서 데이터 성격에 맞게 최적의 갱신 방식을 선택했습니다. 즉시성이 중요한 알림·키오스크 상태는 소켓으로 푸시 형태로 전달하고, 갱신 주기가 길거나 부하가 큰 통계는 폴링으로 처리해서 사용자 경험과 서버 부하 사이의 균형을 맞췄습니다.</p>
+
+    <div class="outcome">
+      <p>도입 후 회계팀의 리포트 가공·발송 업무가 많이 줄었고, <em>의사결정자가 메일을 기다리지 않고 필요한 순간에 직접 대시보드를 열어 상황을 확인</em>할 수 있게 됐습니다.</p>
+    </div>
+  </section>
+
+  <div class="case-divider"><span>End of Case Studies</span></div>
+
+  <footer class="foot">
+    <div><b>서유빈</b> · DOZN 상세 경력기술서</div>
+    <div><a href="index.html" style="color:var(--accent)">← 경력기술서로 돌아가기</a></div>
+  </footer>
+
+</main>
+
+<script>
+  const themeBtn = document.getElementById('theme-btn');
+  if(localStorage.getItem('cv-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.dataset.theme;
+    if(cur === 'dark'){ delete document.documentElement.dataset.theme; localStorage.setItem('cv-theme','light'); }
+    else { document.documentElement.dataset.theme = 'dark'; localStorage.setItem('cv-theme','dark'); }
+  });
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+  // Reveal-on-scroll
+  const targets = document.querySelectorAll('.case, .case-list li, .outcome');
+  targets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
+  targets.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.case-list').forEach(grid => {
+    [...grid.children].forEach((el, i) => { el.style.transitionDelay = (i * 60) + 'ms'; });
+  });
+</script>
+</body>
+</html>
