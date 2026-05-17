@@ -290,15 +290,41 @@
   }
   .foot b{color:var(--ink);font-weight:600;font-family:var(--font-kr)}
 
-  /* print */
+ /* print */
   @media print{
+    @page{size:A4;margin:14mm 12mm}
     .toolbar{display:none!important}
-    body{background:#fff;color:#000;font-size:10.5pt}
-    .page{padding:24px 32px;max-width:none}
-    .hero h1{font-size:36pt}
-    section{padding:22px 0;page-break-inside:auto;border-color:#ccc}
-    .row,.proj{break-inside:avoid}
+    body{background:#fff!important;color:#000;font-size:10.5pt}
+    .page{padding:0;max-width:none}
+  
+    /* ⭐ Reveal 애니메이션 강제 해제 (가장 중요) */
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    *{animation:none!important;transition:none!important}
+  
+    /* 인라인 폰트 사이즈 강제 오버라이드 */
+    .hero h1{font-size:26pt!important;line-height:1.15!important;margin-bottom:8pt}
+    .hero h1 .en{font-size:13pt!important}
+    .sec-head h2{font-size:18pt!important}
+    .about .headline,.about .headline em{font-size:14pt!important;line-height:1.4!important}
+  
+    /* 포인트 컬러 인쇄 보존 */
+    .sec-head h2::after{transform:scaleX(1)!important}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  
+    /* 페이지 분할 */
+    section{padding:14pt 0;page-break-inside:auto;border-color:#ddd}
+    .sec-head{break-after:avoid;page-break-after:avoid}
+    .row,.proj-card,.edu-card{break-inside:avoid;page-break-inside:avoid}
     .hero .contact{break-inside:avoid}
+    .hero{break-inside:avoid}
+  
+    /* 호버 장식 제거 */
+    .proj-card::before,.proj-card::after{display:none}
+    .proj-card,.edu-card{box-shadow:none!important;transform:none!important;border-color:#ddd}
+    .proj-card .detail-link{display:none!important}
+  
+    /* 점 색상 */
+    .block ul li::before,.proj-card ul li::before{background:#666!important}
   }
 </style>
 </head>
