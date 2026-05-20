@@ -10,14 +10,15 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 <style>
   :root{
-    --bg:#FAFAF7;
+    --bg:#FCFCFC;
     --paper:#FFFFFF;
     --ink:#15171A;
     --ink-2:#3F4248;
     --muted:#7B7E86;
-    --line:#E6E4DE;
-    --line-2:#F0EEE8;
+    --line:#E8E8E5;
+    --line-2:#F1F1EE;
     --accent:#3FB8BD;
+    --accent-deep:#2A9C9F;
     --accent-soft:#E8F6F6;
     --font-kr:"Pretendard Variable","Pretendard",system-ui,-apple-system,sans-serif;
     --font-en:"Inter","Pretendard Variable",system-ui,sans-serif;
@@ -57,6 +58,10 @@
     transition:background .2s, color .2s, transform .2s;text-decoration:none;
   }
   .toolbar button:hover, .toolbar a:hover{background:var(--line-2);color:var(--ink);transform:translateY(-1px)}
+  .toolbar button.pdf-btn{
+    background:var(--accent);color:#fff;font-weight:600;
+  }
+  .toolbar button.pdf-btn:hover{background:var(--accent-deep);color:#fff;transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(63,184,189,.6)}
 
   /* page */
   .page{max-width:920px;margin:0 auto;padding:80px 64px 96px}
@@ -78,10 +83,12 @@
   }
   .hero .label::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px}
   .hero h1{
-    font-family:var(--font-kr);font-weight:700;font-size:36px;line-height:1.15;letter-spacing:-.025em;margin:0 0 12px;color:var(--ink);
+    font-family:var(--font-kr);font-weight:700;font-size:36px;line-height:1.15;letter-spacing:-.025em;margin:0 0 16px;color:var(--ink);
   }
-  .hero .lead{font-size:16.5px;color:var(--ink-2);margin:0 0 22px;line-height:1.65;max-width:760px}
-  .hero .lead b{color:var(--ink);font-weight:600;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+  .hero .lead{font-size:15.5px;color:var(--ink-2);margin:0 0 14px;line-height:1.75;max-width:760px}
+  .hero .lead:last-of-type{margin-bottom:22px}
+  .hero .lead b{color:var(--ink);font-weight:600}
+  .hero .lead em{font-style:normal;color:var(--ink);font-weight:600;background:var(--accent-soft);padding:1px 5px;border-radius:3px}
   .hero .meta-line{
     display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--font-en);font-size:13px;color:var(--muted);
     padding-top:18px;border-top:1px dashed var(--line);
@@ -151,9 +158,9 @@
   /* nav between cases */
   .case-divider{
     margin:48px 0 0;text-align:center;font-family:var(--font-en);font-size:11px;letter-spacing:.32em;color:var(--muted);
+    position:relative;
   }
   .case-divider span{display:inline-block;padding:0 12px;background:var(--bg);position:relative;z-index:1}
-  .case-divider{position:relative}
   .case-divider::before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:var(--line)}
 
   /* footer */
@@ -164,13 +171,44 @@
   }
   .foot b{color:var(--ink);font-weight:600;font-family:var(--font-kr)}
 
+  /* print — page breaks + scale for clean PDF */
   @media print{
+    @page{size:A4;margin:14mm 12mm}
     .toolbar,.back{display:none!important}
-    body{background:#fff;color:#000;font-size:10.5pt}
-    .page{padding:24px 32px;max-width:none}
-    .hero h1{font-size:28pt}
-    .case{padding:20px 0;page-break-inside:auto;border-color:#ccc}
-    .case-list li,.outcome{break-inside:avoid}
+    body{background:#fff!important;color:#000;font-size:10.5pt}
+    .page{padding:0;max-width:none}
+
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    *{animation:none!important;transition:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+
+    /* HERO */
+    .hero{padding-bottom:14pt;margin-bottom:16pt}
+    .hero .label{font-size:8pt;margin-bottom:8pt}
+    .hero h1{font-size:20pt!important;margin-bottom:10pt}
+    .hero .lead{font-size:10pt;line-height:1.7;margin-bottom:8pt;max-width:none}
+    .hero .lead:last-of-type{margin-bottom:14pt}
+    .hero .meta-line{font-size:9pt;gap:3pt 14pt;padding-top:8pt}
+    .hero .meta-line .k{font-size:7.5pt}
+
+    /* CASES */
+    .case{padding:14pt 0;page-break-inside:auto;break-inside:auto}
+    .case .head{margin-bottom:10pt;page-break-after:avoid;break-after:avoid}
+    .case .case-no{font-size:8pt;margin-bottom:5pt}
+    .case h2{font-size:15pt!important;padding-bottom:4pt}
+    .case h2::after{transform:scaleX(1)!important;bottom:0;width:24pt}
+    .case h3{font-size:11.5pt;margin:12pt 0 6pt;page-break-after:avoid;break-after:avoid}
+    .case p{font-size:9.5pt;line-height:1.7;margin:0 0 6pt;max-width:none}
+
+    .case-list{gap:5pt;margin:0 0 8pt;max-width:none}
+    .case-list li{padding:7pt 10pt;font-size:9pt;line-height:1.6;page-break-inside:avoid;break-inside:avoid;border:1px solid #ddd!important;border-left:3px solid var(--accent)!important;box-shadow:none!important;transform:none!important}
+    .case-list li b{font-size:9.5pt;margin-bottom:2pt}
+
+    .outcome{margin-top:10pt;padding:10pt 14pt;page-break-inside:avoid;break-inside:avoid;border:1px solid #ddd!important;max-width:none}
+    .outcome::before{font-size:7pt;padding:1pt 6pt}
+    .outcome p{font-size:9.5pt;line-height:1.6}
+
+    .case-divider{margin:14pt 0 0;font-size:7.5pt}
+    .foot{margin-top:14pt;padding-top:8pt;font-size:7.5pt}
   }
 </style>
 </head>
@@ -179,7 +217,7 @@
 <div class="toolbar" role="toolbar" aria-label="page tools">
   <a href="index.html" title="목록으로">목록</a>
   <button id="theme-btn" type="button">Theme</button>
-  <button id="print-btn" type="button">PDF / Print</button>
+  <button id="print-btn" class="pdf-btn" type="button">PDF 저장 ↓</button>
 </div>
 
 <main class="page">
@@ -190,14 +228,9 @@
   <header class="hero">
     <div class="label">상세 경력기술서 · Case Study</div>
     <h1>DOZN BackOffice</h1>
-    <p class="lead">
-      DOZN의 키오스크 사업은 <b>전국에 흩어진 기기에서 매일 현금과 거래가 발생하는 구조이기에, 운영·정산·모니터링이 정교하게 맞물려야 합니다.</b> 다만 실제로는 상당 부분이 이메일·유선·엑셀 등 시스템 바깥의 도구로 처리되고 있었고, 담당자 부재나 단순 누락이 곧바로 시재 불일치·정산 지연으로 이어지는 구조였습니다.
-      이 업무들을 <b>도메인 모델로 다시 설계하여 시스템 안으로 옮기는 작업을 진행</b>했습니다. 자산 이동 워크플로우, 업체별 정산·대사 자동화, 실시간 대시보드 세 가지 축으로 나눠 진행했고, 운영팀·재무팀·경영진이 같은 데이터를 기준으로 움직일 수 있도록 묶는 데 초점을 뒀습니다.
-      <p><p/>
-      아래 세 개의 케이스는 그 과정에서 풀어낸 문제와 설계 의도, 도입 후 달라진 점을 정리한 기록입니다.
-      
-      사람 손을 타던 <b>키오스크 운영 · 정산 · 모니터링 업무</b>를 도메인 모델로 재설계해 시스템 안으로 옮겨 놓은 이야기. 운영팀·재무팀·경영진이 같은 데이터를 보고 움직일 수 있는 기반을 만들었습니다.
-    </p>
+    <p class="lead">DOZN의 키오스크 사업은 <b>전국에 흩어진 기기에서 매일 현금과 거래가 발생하는 구조이기에, 운영·정산·모니터링이 정교하게 맞물려야 합니다.</b> 다만 실제로는 상당 부분이 이메일·유선·엑셀 등 시스템 바깥의 도구로 처리되고 있었고, 담당자 부재나 단순 누락이 곧바로 시재 불일치·정산 지연으로 이어지는 구조였습니다.</p>
+    <p class="lead">이 업무들을 <b>도메인 모델로 다시 설계하여 시스템 안으로 옮기는 작업</b>을 진행했습니다. <em>자산 이동 워크플로우 · 업체별 정산·대사 자동화 · 실시간 대시보드</em> 세 가지 축으로 나눠 진행했고, 운영팀·재무팀·경영진이 같은 데이터를 기준으로 움직일 수 있도록 묶는 데 초점을 뒀습니다.</p>
+    <p class="lead">아래 세 개의 케이스는 그 과정에서 풀어낸 문제와 설계 의도, 도입 후 달라진 점을 정리한 기록입니다.</p>
     <div class="meta-line">
       <div><span class="k">Company</span><span class="v">(주)더즌 DOZN</span></div>
       <div><span class="k">Role</span><span class="v">키오스크 개발팀 매니저</span></div>
@@ -217,7 +250,7 @@
     <p>키오스크 현금 보충·회수·재배치 등 현물 자산이 움직이는 업무가 시스템 없이 사람 간 커뮤니케이션에 의존하고 있었습니다. 운영 관리자가 이메일과 유선으로 수송을 지시하고, 작업 결과는 엑셀에 수기로 정리해 공유하는 구조였기 때문에 <b>업무 흐름이 시스템 바깥에 존재하는 상태</b>였습니다.</p>
     <p>이로 인해 다음과 같은 문제가 반복적으로 발생했습니다.</p>
     <ul class="case-list">
-      <li><b>현금 수송 요청 누락</b><span>구두·이메일 지시 특성상 수신자가 인지하지 못한 채 지나가는 케이스가 있었고, 누락 사실은 추후 시재 불일치가 확인된 뒤에야 경우가 많았습니다.</span></li>
+      <li><b>현금 수송 요청 누락</b><span>구두·이메일 지시 특성상 수신자가 인지하지 못한 채 지나가는 케이스가 있었고, 누락 사실은 추후 시재 불일치가 확인된 뒤에야 발견되는 경우가 많았습니다.</span></li>
       <li><b>데이터 대사 불일치</b><span>운영팀 엑셀, 재무팀 엑셀, 어드민 데이터가 각각 따로 관리되다 보니 같은 건이 서로 다르게 기록되는 일이 잦았습니다.</span></li>
       <li><b>담당자 부재 시 소통 단절</b><span>특정 담당자만 맥락을 알고 있는 작업이 많아서, 휴가나 외근으로 부재할 경우 작업이 멈추거나 잘못된 정보로 진행되는 휴먼 에러가 발생했습니다.</span></li>
       <li><b>전체 흐름 가시성 부재</b><span>어떤 키오스크에 어떤 작업이 어느 단계까지 진행됐는지 한 화면에서 볼 수 없어서, 작업자가 매번 개별로 상태를 확인해야 하는 비효율이 누적됐습니다.</span></li>
@@ -227,7 +260,8 @@
     <p>먼저 자산 운영 관리자, 재무팀과 함께 실제 현금 수송이 어떤 순서로 일어나고, 각 단계에서 누가 무엇을 결정하며, 어떤 예외 케이스(긴급 보충, 회수, 점검 동반 작업 등)가 있는지를 정리했습니다.</p>
     <p>이렇게 정리한 흐름을 바탕으로 <b>자산 이동 작업의 생명주기를 도메인 모델로 정의</b>하고, 다음과 같은 규칙을 도메인 레이어에 응집시켰습니다.</p>
     <ul class="case-list">
-      <li><b>상태 전이 규칙</b><span>요청 → 수락 → 진행 → 완료 → 대사 확정으로 이어지는 단계 사이에 허용되는 전이만 명시적으로 정의하고, 비정상적인 상태 점프는 도메인 차원에서 차단했습니다.</span></li>
+      <li><b>상태 전이 규칙 + 동시성 제어</b><span>요청 → 수락 → 진행 → 완료 → 대사 확정으로 이어지는 단계 사이에 허용되는 전이만 명시적으로 정의하고, 비정상적인 상태 점프는 도메인 차원에서 차단했습니다. 같은 수송 건을 여러 담당자가 동시에 처리하려는 충돌은 <b>비관적 락(SELECT FOR UPDATE) + 상태 enum 가드</b>로 이중 차단해, 후순위 요청은 즉시 실패하고 명확한 원인을 돌려받을 수 있도록 만들었습니다.</span></li>
+      <li><b>실시간 시재 기반 입력 검증</b><span>키오스크에서 실시간으로 올라오는 시재 데이터를 기준으로, 작업 입력 시점부터 보유 시재를 초과한 출고·음수 시재 같은 비정상 케이스를 도메인 차원에서 막았습니다. 같은 검증 로직이 서비스 레이어 여러 곳에 흩어져 있던 것을 도메인 하나에 응집시켰습니다.</span></li>
       <li><b>정합성 검증 로직</b><span>키오스크 시재, 운영팀 보유 현금, 송금/입금 데이터와의 정합성 검사를 한 곳에 응집시켜서, 동일한 검증 로직이 여러 레이어에 흩어져 중복되는 문제를 없앴습니다.</span></li>
       <li><b>작업 단위 이력화</b><span>요청, 수락, 연락, 메모, 대사, 작업 정보 입력 등 모든 액션을 작업 단위로 이력화해 사후 추적이 가능하도록 설계했습니다.</span></li>
     </ul>
@@ -262,7 +296,8 @@
     <ul class="case-list">
       <li><b>스케줄링 기반 자동 처리</b><span>일일 대사, 주간 대사, 거래 단위 대사 등 업체별 정산 주기에 맞춰 스케줄러로 자동 실행되도록 구성했습니다. 정상 케이스는 사람 손 안 타고 끝까지 처리되는 게 기본값입니다.</span></li>
       <li><b>원본 데이터 보존</b><span>업체에서 받은 파일 원본을 그대로 저장하는 단계, 정규화된 대사용 데이터로 변환하는 단계, 사내 거래 데이터와 비교한 결과를 보관하는 단계를 분리했습니다. 추후 분쟁이 생겼을 때 업체가 보낸 원본을 그대로 확인할 수 있도록 보장하기 위함이었습니다.</span></li>
-      <li><b>불일치 슬랙 알림</b><span>대사 불일치가 발생하면 즉시 슬랙으로 상세 내용을 보내서, 재무팀과 영업팀이 같은 채널에서 빠르게 확인하고 처리할 수 있게 했습니다. "문제가 있다는 사실 자체를 며칠 뒤에야 아는" 상황을 없앴습니다.</span></li>
+      <li><b>송금 멱등성 + 재시도 전략</b><span>돈을 보내는 시스템인 만큼 같은 송금이 두 번 실행되지 않도록 거래 ID 기반 <b>멱등성 키로 이중 보호</b>하고, 외부 API 실패 시 지수 백오프로 재시도 — 일정 횟수를 초과하면 자동 중단 후 담당자 알림으로 전환되도록 설계했습니다.</span></li>
+      <li><b>이메일 + 슬랙 이중 알림</b><span>대사 불일치·이상 감지 시 재무팀·영업팀이 상주하는 슬랙과, 공식 기록을 남기는 이메일을 동시에 발송합니다. 추가로 자금팀·협력사 담당자에게도 상황별 메일이 자동 발송되도록 해, 어느 채널 하나만 놓쳐도 이슈가 숨어버리지 않도록 이중화했습니다.</span></li>
       <li><b>백오피스 조회 기능</b><span>누적 정산·대사 데이터를 백오피스에서 실시간으로 볼 수 있게 해서, 별도 엑셀 없이 원하는 기간·업체·거래 유형으로 조회할 수 있게 했습니다.</span></li>
       <li><b>확정 · 송금 분리 로직</b><span>자동 대사를 통과한 건이라도 바로 송금되지 않고, 재무팀의 명시적 확정 액션이 있어야 송금되도록 분리했습니다. 자동화의 편의성과 자금 집행 통제권 사이에서 균형을 잡기 위해 의도적으로 나눈 설계입니다.</span></li>
     </ul>
@@ -297,8 +332,9 @@
       <li><b>토탈 키오스크 실시간 현황 및 알림</b><span>전국에 분산된 키오스크의 상태(정상·이슈·점검 등)와 알림 이력을 한 화면에 모았습니다. 운영팀이 별도 모니터링 도구 없이 이상 징후를 바로 확인할 수 있게 했습니다.</span></li>
       <li><b>경쟁사 환율 비교</b><span>사내 환율과 스프레드 데이터를 기준으로 경쟁사 환율을 함께 조회할 수 있는 기능. 단순 모니터링을 넘어 환율 정책 의사결정에 직접 활용되는 부분이었습니다.</span></li>
     </ul>
-    <p>기술적으로는 <em>실시간 소켓 통신과 폴링을 혼합</em>해서 데이터 성격에 맞게 최적의 갱신 방식을 선택했습니다. 즉시성이 중요한 알림·키오스크 상태는 소켓으로 푸시 형태로 전달하고, 갱신 주기가 길거나 부하가 큰 통계는 폴링으로 처리해서 사용자 경험과 서버 부하 사이의 균형을 맞췄습니다.</p>
+    <p>기술적으로는 데이터 성격에 맞춰 <em>소켓과 폴링을 의도적으로 분리</em>했습니다. 키오스크 알림·이상 상태처럼 <b>즉시성이 필수이고 발생 빈도가 낮은 이벤트는 소켓 푸시</b>로 보내 사용자가 새로고침 없이 0초에 가까운 반영을 보장하고, <b>변경 빈도가 높은 집계 데이터(거래·환율 비교 등)는 폴링</b>으로 처리해 사용자가 화면을 보고 있을 때만 갱신되도록 했습니다. 모든 데이터를 소켓으로 연결해두면 클라이언트 수만큼 서버 자원이 낭비되고, 변경이 잦은 데이터를 폴링으로만 가져오면 DB 부하가 누적되기 때문에 — <em>비용·부하·UX 셋의 균형</em>을 맞춘 분리였습니다.</p>
     <p>또한 <em>신규 거래 서비스가 추가됨에 따라</em> 지속적 서포트를 진행하며 <em>대시보드를 확장</em>해오고 있습니다.</p>
+
     <div class="outcome">
       <p>도입 후 회계팀의 리포트 가공·발송 업무가 많이 줄었고, <em>의사결정자가 메일을 기다리지 않고 필요한 순간에 직접 대시보드를 열어 상황을 확인</em>할 수 있게 됐습니다.</p>
     </div>
