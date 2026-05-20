@@ -10,13 +10,13 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 <style>
   :root{
-    --bg:#FAFAF7;
+    --bg:#FCFCFC;
     --paper:#FFFFFF;
     --ink:#15171A;
     --ink-2:#3F4248;
     --muted:#7B7E86;
-    --line:#E6E4DE;
-    --line-2:#F0EEE8;
+    --line:#E8E8E5;
+    --line-2:#F1F1EE;
     --accent:#3FB8BD;
     --accent-soft:#E8F6F6;
     --font-kr:"Pretendard Variable","Pretendard",system-ui,-apple-system,sans-serif;
@@ -64,8 +64,38 @@
   .page{max-width:1040px;margin:0 auto;padding:80px 64px 96px}
   @media (max-width:760px){.page{padding:56px 24px 80px}}
 
-  /* HERO */
-  .hero{padding-bottom:40px;border-bottom:1px solid var(--line);position:relative}
+  /* HERO — photo aligned only with tagline→role block */
+  .hero{
+    padding-bottom:40px;border-bottom:1px solid var(--line);position:relative;
+    display:flex;flex-direction:column;
+  }
+  .hero-top{
+    display:grid;grid-template-columns:1fr 120px;gap:32px;align-items:start;
+  }
+  .hero-text{min-width:0}
+  .hero-aside{
+    position:relative;display:flex;flex-direction:column;align-items:stretch;
+  }
+  .hero-avatar{
+    width:100%;aspect-ratio:1/1;border-radius:50%;
+    overflow:hidden;position:relative;
+    background:#E6EDF5;
+    box-shadow:0 0 0 1px var(--line), 0 18px 36px -22px rgba(63,184,189,.3);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .hero-avatar::after{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    box-shadow:inset 0 0 0 0px var(--accent);transition:box-shadow .35s;pointer-events:none;
+  }
+  .hero-avatar:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--accent), 0 28px 50px -22px rgba(63,184,189,.5)}
+  .hero-avatar:hover::after{box-shadow:inset 0 0 0 2px var(--accent)}
+  .hero-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .hero-avatar:hover img{transform:scale(1.04)}
+  @media (max-width:760px){
+    .hero-top{grid-template-columns:1fr;gap:16px}
+    .hero-aside{order:-1;flex-direction:row;align-items:center}
+    .hero-avatar{width:80px;aspect-ratio:1/1}
+  }
   .hero .label{
     font-family:var(--font-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
     margin-bottom:18px;display:flex;align-items:center;gap:10px;
@@ -101,8 +131,9 @@
   }
 
   .hero .contact{
-    margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 28px;
+    margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;
     font-family:var(--font-en);font-size:14px;
+    padding-top:14px;border-top:1px dashed var(--line);
   }
   .hero .contact > div{display:flex;align-items:baseline;gap:8px;min-width:0}
   .hero .contact .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;flex-shrink:0}
@@ -110,6 +141,19 @@
   .hero .contact .v::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   .hero .contact .v:hover{color:var(--accent)}
   .hero .contact .v:hover::after{transform:scaleX(1)}
+  .hero .contact .spacer{flex:1;min-width:0}
+  .hero .contact .detail-cta{
+    font-family:var(--font-en);font-size:12.5px;color:var(--accent);font-weight:600;letter-spacing:.02em;
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--accent-soft);padding:7px 14px;border-radius:999px;
+    transition:transform .25s, background .25s, color .25s, box-shadow .25s;
+  }
+  .hero .contact .detail-cta::after{content:"→";transition:transform .25s}
+  .hero .contact .detail-cta:hover{
+    background:var(--accent);color:#fff;
+    box-shadow:0 6px 16px -8px rgba(63,184,189,.6);
+  }
+  .hero .contact .detail-cta:hover::after{transform:translateX(3px)}
 
   /* sections */
   section{padding:60px 0 8px;border-bottom:1px solid var(--line)}
@@ -290,49 +334,55 @@
   }
   .foot b{color:var(--ink);font-weight:600;font-family:var(--font-kr)}
 
- /* print */
+  /* print */
   @media print{
     @page{size:A4;margin:14mm 12mm}
     .toolbar{display:none!important}
     body{background:#fff!important;color:#000;font-size:10.5pt}
     .page{padding:0;max-width:none}
-  
-    /* ⭐ Reveal 애니메이션 강제 해제 (가장 중요) */
+
+    /* Force all reveal-animated elements visible */
     .reveal{opacity:1!important;transform:none!important;transition:none!important}
     *{animation:none!important;transition:none!important}
-  
-    /* 인라인 폰트 사이즈 강제 오버라이드 */
+
+    /* Override user inline styles that break print */
     .hero h1{font-size:26pt!important;line-height:1.15!important;margin-bottom:8pt}
     .hero h1 .en{font-size:13pt!important}
     .sec-head h2{font-size:18pt!important}
     .about .headline,.about .headline em{font-size:14pt!important;line-height:1.4!important}
-  
-    /* 포인트 컬러 인쇄 보존 */
+
+    /* Keep accent visible in print */
     .sec-head h2::after{transform:scaleX(1)!important}
-    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
-  
-    /* 페이지 분할 */
+    .hero .role .pill,.row .meta .tag,.proj-card h3 .tag-now,
+    .skill-row .items .core,.about p b,.proj-card .desc b,
+    .hero .role b,.about .quote{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;
+    }
+
+    /* Sections: keep titles with content */
     section{padding:14pt 0;page-break-inside:auto;border-color:#ddd}
     .sec-head{break-after:avoid;page-break-after:avoid}
     .row,.proj-card,.edu-card{break-inside:avoid;page-break-inside:avoid}
     .hero .contact{break-inside:avoid}
-    .hero{break-inside:avoid}
-  
-    /* 호버 장식 제거 */
+    .hero{break-inside:avoid;page-break-after:auto}
+
+    /* Hover-related circle decorations off */
     .proj-card::before,.proj-card::after{display:none}
     .proj-card,.edu-card{box-shadow:none!important;transform:none!important;border-color:#ddd}
+
+    /* External link arrows still visible */
+    a{color:inherit;text-decoration:none}
     .proj-card .detail-link{display:none!important}
-  
-    /* 점 색상 */
+
+    /* Lists: keep dashes black */
     .block ul li::before,.proj-card ul li::before{background:#666!important}
   }
 </style>
 </head>
-<body style="background-color: rgb(255, 255, 255); font-size: 15px">
+<body style="font-size: 15px">
 
 <div class="toolbar" role="toolbar" aria-label="page tools">
   <button id="theme-btn" type="button">Theme</button>
-<!--  <button id="print-btn" type="button">PDF / Print</button> -->
 </div>
 
 <main class="page">
@@ -340,16 +390,25 @@
   <!-- HERO -->
   <header class="hero">
     <div class="label">경력기술서 · Curriculum Vitae</div>
-    <p class="tagline">시각디자인을 전공한 <em>센스있는 개발자</em></p>
-    <h1 style="font-size: 30px">서유빈<span class="en">Seo Yubin</span></h1>
-    <p class="role"><span class="pill">Backend · Web</span><b>Spring & Kotlin</b> 기반 환전 · 현금 거래 · 결제 도메인의 백오피스를 만듭니다.</p>
-    <p>백엔드부터 화면까지 <b>프로젝트 전반을 직접 다루며</b>, 시스템 바깥에 있던 업무를 시스템 안으로 옮겨 <b>시스템화</b>하는 일에 익숙합니다.</p>
+
+    <div class="hero-top">
+      <div class="hero-text">
+        <p class="tagline">시각디자인을 전공한 <em>센스있는 개발자</em></p>
+        <h1 style="font-size: 32px">서유빈<span class="en">Seo Yubin</span></h1>
+        <p class="role"><span class="pill">Backend · Web</span><b>Spring & Kotlin</b> 기반 환전 · 현금 거래 · 결제 도메인의 백오피스를 만듭니다.</p>
+      </div>
+      <aside class="hero-aside" aria-hidden="true">
+        <div class="hero-avatar">
+          <img src="profile.jpg" alt="서유빈 프로필" />
+        </div>
+      </aside>
+    </div>
 
     <div class="contact">
-      <div><span class="k">Email</span><a class="v" href="#">dbqls7781@gmail.com</a></div>
+      <div><span class="k">Email</span><a class="v" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=dbqls7781@gmail.com" target="_blank" rel="noopener"><span class="__cf_email__" data-cfemail="44202635283773737c75042329252d286a272b29">[email&#160;protected]</span></a></div>
       <div><span class="k">Phone</span><a class="v" href="tel:+821082877781">010-8287-7781</a></div>
       <div><span class="k">GitHub</span><a class="v" href="https://github.com/7uckydog" target="_blank" rel="noopener">github.com/7uckydog</a></div>
-      <!-- <div><span class="k">Web</span><a class="v" href="https://7uckydog.github.io" target="_blank" rel="noopener">7uckydog.github.io</a></div> -->
+      <div><span class="k">Detail</span><a class="v" href="dozn-detail.html">상세 경력기술서</a></div>
     </div>
   </header>
 
@@ -408,7 +467,7 @@
           <div class="block">
             <h4>홈페이지 고도화 및 유지보수</h4>
             <ul>
-              <li>홈페이지 UI 고도화하여 <a href="https://mx-dozn.co.kr/ko" target="_blank" rel="noopener">신규 홈페이지 런칭 ↗</a> (Claude 활용 바이브 코딩)</li>
+              <li>홈페이지 UI 고도화하여 <a href="https://mx-dozn.co.kr/ko" target="_blank" rel="noopener">신규 홈페이지 런칭 ↗</a> (Claude 활용 바이브 코딩)</li>
               <li>기존 홈페이지 API의 version up — 더프리(더즌 환전 앱) API 제공</li>
               <li>이벤트 팝업 관리</li>
             </ul>
@@ -521,29 +580,29 @@
           <h3>DOZN BackOffice <span class="tag-now">현재</span></h3>
           <div class="meta"><span class="yr">2024.07 — 현재</span><span>(주)더즌</span></div>
         </div>
-        <p class="desc"><b>환전 · 키오스크 · 자산 운영을 아우르는 운영 시스템</b>. 수송·정산·대사 업무를 도메인 모델로 재설계하여 자동화하고, 통합 대시보드로 데이터를 시각화</p>
+        <p class="desc"><b>환전 · 키오스크 · 자산 운영을 아우르는 운영 시스템</b>. 수송·정산·대사 업무를 도메인 모델로 재설계하여 자동화, 데이터 시각화 통합 대시보드 개설</p>
         <ul>
           <li><b>자산 이동 워크플로우 시스템화</b> — 키오스크 현금 수송 생명주기를 도메인으로 정의, 요청·수락·완료·대사까지 일관 관리</li>
           <li><b>나이스 · 이즐(eZL) 정산 자동화</b> — 업체별 정산 룰을 규칙화, 스케줄러 기반 자동 대사·송금 파이프라인 구축</li>
           <li><b>실시간 대시보드</b> — 거래·키오스크 상태·경쟁사 환율을 소켓과 폴링을 혼합해 시각화</li>
         </ul>
         <a class="link detail-link" href="dozn-detail.html">상세 경력기술서 보기 →</a>
-        <div class="stack"><b>Stack</b>Kotlin · Spring Boot · JPA · Querydsl · MySQL · Next.js · Tailwind CSS · Zod · Chart.js</div>
+        <div class="stack"><b>Stack</b>Kotlin · Spring Boot · JPA · Querydsl · MySql · Next.js · Tailwind CSS · Zod · Chart.js</div>
       </article>
 
       <article class="proj-card">
         <div class="top">
-          <h3>키오스크 리뉴얼 홈페이지</h3>
+          <h3>DOZN 환전 키오스크 리뉴얼 홈페이지 <span class="tag-now">현재</span></h3>
           <div class="meta"><span class="yr">2026.03 — 2026.05</span><span>(주)더즌</span></div>
         </div>
-        <p class="desc">환전 · 키오스크용 <b>홈페이지 리뉴얼</b>. 기존 UI, 슬로우 쿼리를 개선한 리뉴얼 홈페이지 바이브 코딩</p>
+        <p class="desc"><b>환전 · 키오스크용 홈페이지 리뉴얼</b>. 기존 올드 UI 및 슬로우 쿼리를 개선한 리뉴얼 홈페이지 바이브 코딩</p>
         <ul>
-          <li>기존 API를 기반으로 한 v2 API 개발 진행</li>
-          <li>리뉴얼을 진행하며 더프리(더즌 선불카드용 앱)에 키오스크 목록·상세·환율 등 API 및 Swagger 문서 제공</li>
+          <li>기존 API를 기반으로한 v2 API 개발 진행</li>
+          <li>리뉴얼을 진행하며 더프리(THE Free : 더즌 선불카드용 앱)에 키오스크 목록, 상세, 환율 등의 swagger · API 제공</li>
           <li><b>외부 API 연동을 통한 신규 기능 개발</b> — 데이포유 연동 (팝업 스토어 정보) | 서버 파트 API 연동 (실시간 환율 조회) 등</li>
         </ul>
-        <a class="link detail-link" target="_blank" rel="noopener" href="https://mx-dozn.co.kr/ko">리뉴얼 홈페이지 →</a>
-        <div class="stack"><b>Stack</b>Spring Boot · JPA · Querydsl · MySQL · Next.js · Tailwind CSS · Zod · GraphQL</div>
+        <a class="link detail-link" href="https://mx-dozn.co.kr/ko" target="_blank" rel="noopener">리뉴얼 홈페이지 →</a>
+        <div class="stack"><b>Stack</b>Spring Boot · JPA · Querydsl · MySql · Next.js · Tailwind CSS · Zod · GraphQL</div>
       </article>
 
       <article class="proj-card">
@@ -629,7 +688,7 @@
       </div>
       <div class="skill-row">
         <h4>Frontend</h4>
-        <div class="items">Next.js<span class="sep">·</span>Tailwind CSS<span class="sep">·</span>Zod<span class="sep">·</span>HTML<span class="sep">·</span>CSS<span class="sep">·</span>JavaScript<span class="sep">·</span>jQuery<span class="sep">·</span>Ajax<span class="sep">·</span>JSP</div>
+        <div class="items">React<span class="sep">·</span>HTML<span class="sep">·</span>CSS<span class="sep">·</span>JavaScript<span class="sep">·</span>jQuery<span class="sep">·</span>Ajax<span class="sep">·</span>JSP</div>
       </div>
       <div class="skill-row">
         <h4>Database</h4>
@@ -659,22 +718,22 @@
           <span class="when">2021.12 — 2022.08</span>
         </div>
         <div class="role">클라우드 컴퓨팅 웹 융합 응용 SW개발자 양성과정 A</div>
-        <p>Java 풀스택 개발자 과정 수료. 세미 | 파이널 프로젝트 2개 개발 진행 및 프레젠테이션</p>
+        <p>Java 풀스택 개발자 과정 수료. 세미 / 파이널 프로젝트 2개 완성 및 발표.</p>
       </article>
-      
       <article class="edu-card">
         <div class="top">
           <h3>ORACLE KOREA 연말 세미나</h3>
           <span class="when">2023.11.23</span>
         </div>
         <div class="role">외부 활동</div>
-        <p>오라클 전반 시스템 점검 및 향후 추진 계획 파악</p>
+        <p>오라클 전반 시스템 점검 및 향후 추진 계획 파악.</p>
       </article>
     </div>
   </section>
 
   <footer class="foot">
     <div><b>서유빈</b> · 경력기술서</div>
+    <div>References on request</div>
   </footer>
 
 </main>
@@ -687,7 +746,6 @@
     if(cur === 'dark'){ delete document.documentElement.dataset.theme; localStorage.setItem('cv-theme','light'); }
     else { document.documentElement.dataset.theme = 'dark'; localStorage.setItem('cv-theme','dark'); }
   });
-  document.getElementById('print-btn').addEventListener('click', () => window.print());
 
   // Reveal-on-scroll for sections, cards, and section heads
   const targets = document.querySelectorAll('section, .proj-card, .edu-card, .sec-head, .row');
@@ -700,9 +758,8 @@
       }
     });
   }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
-  targets.forEach(el => io.observe(el));
+  targets.forEach(el => el.classList && io.observe(el));
 
-  // Stagger project / edu cards inside the same grid
   document.querySelectorAll('.proj-grid, .edu-grid').forEach(grid => {
     [...grid.children].forEach((el, i) => {
       el.style.transitionDelay = (i * 70) + 'ms';
@@ -711,6 +768,3 @@
 </script>
 </body>
 </html>
-
-<style id="__om-edit-overrides">
-</style>
