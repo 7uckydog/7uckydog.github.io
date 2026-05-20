@@ -59,6 +59,14 @@
   }
   .toolbar button:hover{background:var(--line-2);color:var(--ink);transform:translateY(-1px)}
   .toolbar button:active{transform:translateY(0)}
+  .toolbar a.pdf-btn,.toolbar button.pdf-btn{
+    border:0;background:var(--accent);color:#fff;font-family:var(--font-en);font-size:12.5px;font-weight:600;
+    letter-spacing:.02em;padding:7px 14px;border-radius:7px;cursor:pointer;text-decoration:none;
+    transition:background .2s, transform .2s, box-shadow .2s;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .toolbar a.pdf-btn:hover,.toolbar button.pdf-btn:hover{background:var(--accent-deep,#2A9C9F);color:#fff;transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(63,184,189,.6)}
+  .toolbar a.pdf-btn:active,.toolbar button.pdf-btn:active{transform:translateY(0)}
 
   /* page frame */
   .page{max-width:1040px;margin:0 auto;padding:80px 64px 96px}
@@ -103,32 +111,30 @@
   .hero .label::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
   .hero:hover .label::before{width:42px}
   .hero .tagline{
-    font-family:var(--font-kr);font-size:16px;font-weight:500;color:var(--ink-2);letter-spacing:-.005em;
-    margin:0 0 14px;line-height:1.5;
+    font-family:var(--font-kr);font-size:36px;font-weight:800;color:var(--ink-2);letter-spacing:-.03em;
+    margin:0 0 16px;line-height:1.2;
   }
-  .hero .tagline em{font-style:normal;color:var(--ink);font-weight:700;background:var(--accent-soft);padding:1px 6px;border-radius:3px;transition:background .25s, transform .25s; display:inline-block}
-  .hero .tagline em:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
+  .hero .tagline em{font-style:normal;color:var(--accent);font-weight:800;transition:color .25s; display:inline-block}
+  .hero .tagline em:hover{color:var(--accent-deep,#2A9C9F)}
+  .hero .tagline .name{color:var(--ink)}
+  .hero .tagline em{font-style:normal;color:var(--accent);font-weight:800;transition:color .25s; display:inline-block}
+  .hero .tagline em:hover{color:var(--accent-deep,#2A9C9F)}
   .hero h1{
     font-family:var(--font-kr);font-weight:700;font-size:46px;line-height:1.1;letter-spacing:-.025em;margin:0 0 10px;color:var(--ink);
   }
   .hero h1 .en{
-    font-family:var(--font-en);font-weight:500;color:var(--muted);font-size:20px;letter-spacing:-.005em;
-    display:inline-block;margin-left:14px;vertical-align:5px;transition:color .25s, transform .25s;
+    font-family:var(--font-en);font-weight:500;color:var(--muted);font-size:18px;letter-spacing:.155em;
+    display:block;margin-left:0;margin-top:4px;transition:color .25s, transform .25s;
   }
   .hero h1:hover .en{color:var(--accent);transform:translateX(2px)}
   .hero .role{font-size:16px;color:var(--ink-2);margin:0;line-height:1.6}
   .hero .role b{color:var(--ink);font-weight:600}
-  .hero .role .pill{
-    display:inline-flex;align-items:center;gap:6px;font-family:var(--font-en);font-size:12px;font-weight:600;
-    color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;letter-spacing:.02em;
-    margin-right:6px;vertical-align:1px;transition:transform .25s, box-shadow .25s, background .25s;
+  .hero .role .role-tag{
+    display:inline-flex;align-items:center;font-family:var(--font-en);font-size:12px;font-weight:600;
+    color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:999px;letter-spacing:.02em;
+    margin-right:8px;vertical-align:1px;transition:transform .25s, box-shadow .25s, background .25s, color .25s;
   }
-  .hero .role .pill::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2.4s ease-in-out infinite}
-  .hero .role .pill:hover{transform:translateY(-1px);box-shadow:0 4px 14px -6px rgba(63,184,189,.5)}
-  @keyframes pulse{
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.4;transform:scale(.8)}
-  }
+  .hero .role .role-tag:hover{transform:translateY(-1px);background:var(--accent);color:#fff;box-shadow:0 4px 14px -6px rgba(63,184,189,.5)}
 
   .hero .contact{
     margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;
@@ -341,41 +347,94 @@
     body{background:#fff!important;color:#000;font-size:10.5pt}
     .page{padding:0;max-width:none}
 
-    /* Force all reveal-animated elements visible */
+    /* Force animations/reveals to final state */
     .reveal{opacity:1!important;transform:none!important;transition:none!important}
     *{animation:none!important;transition:none!important}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
 
-    /* Override user inline styles that break print */
-    .hero h1{font-size:26pt!important;line-height:1.15!important;margin-bottom:8pt}
-    .hero h1 .en{font-size:13pt!important}
-    .sec-head h2{font-size:18pt!important}
-    .about .headline,.about .headline em{font-size:14pt!important;line-height:1.4!important}
+    /* HERO compact for print */
+    .hero{padding-bottom:14pt;display:grid;grid-template-columns:1fr 80px;gap:18pt}
+    .hero-top{display:contents}
+    .hero-text{grid-column:1;grid-row:1}
+    .hero-aside{grid-column:2;grid-row:1;margin-top:0;display:block}
+    .hero-aside::before{display:none}
+    .hero-avatar{width:80px;aspect-ratio:1/1;box-shadow:0 0 0 1px #ccc!important}
+    .hero .label{margin-bottom:8pt;font-size:8.5pt}
+    .hero .tagline{font-size:22pt!important;line-height:1.2;margin:0 0 10pt}
+    .hero .role{font-size:10.5pt;margin-bottom:0}
+    .hero .role .role-tag{font-size:8pt;padding:2px 8px}
+    .hero .contact{grid-column:1 / -1;margin-top:12pt;padding-top:10pt;font-size:9pt;gap:4pt 18pt}
+    .hero .contact .k{font-size:7.5pt}
+    .hero .contact .v{color:#000}
+    .hero .contact .v::after{display:none}
 
-    /* Keep accent visible in print */
-    .sec-head h2::after{transform:scaleX(1)!important}
-    .hero .role .pill,.row .meta .tag,.proj-card h3 .tag-now,
-    .skill-row .items .core,.about p b,.proj-card .desc b,
-    .hero .role b,.about .quote{
-      -webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;
-    }
+    /* Sections */
+    section{padding:14pt 0 0;page-break-inside:auto;border-color:#ddd;break-inside:auto}
+    .sec-head{margin-bottom:14pt;break-after:avoid;page-break-after:avoid}
+    .sec-head h2{font-size:16pt!important;padding-bottom:5pt}
+    .sec-head h2::after{transform:scaleX(1)!important;bottom:0;width:24pt}
+    .sec-head .idx{margin-bottom:6pt;font-size:8pt}
 
-    /* Sections: keep titles with content */
-    section{padding:14pt 0;page-break-inside:auto;border-color:#ddd}
-    .sec-head{break-after:avoid;page-break-after:avoid}
-    .row,.proj-card,.edu-card{break-inside:avoid;page-break-inside:avoid}
-    .hero .contact{break-inside:avoid}
-    .hero{break-inside:avoid;page-break-after:auto}
+    /* About */
+    .about p{font-size:10pt;line-height:1.7;margin:0 0 8pt;max-width:none}
+    .about .headline{font-size:13pt!important;margin-bottom:10pt}
+    .about .headline em{font-size:13pt!important}
+    .about .quote{font-size:9.5pt;padding:10pt 14pt;margin-top:10pt}
 
-    /* Hover-related circle decorations off */
+    /* Experience rows */
+    .row{grid-template-columns:90pt 1fr;gap:18pt;padding:10pt 0;break-inside:auto}
+    .row .meta{font-size:9pt}
+    .row .meta .dur{font-size:9pt}
+    .row .meta .tag{font-size:7.5pt;padding:2px 6px;margin-top:4pt}
+    .row .body h3{font-size:12pt;margin-bottom:2pt;page-break-after:avoid;break-after:avoid}
+    .row .body h3 .ext{font-size:8pt}
+    .row .body .role{font-size:9.5pt;margin-bottom:6pt;page-break-after:avoid}
+    .row .body .lead{font-size:9.5pt;margin-bottom:8pt}
+    .block{margin-top:8pt}
+    .block h4{font-size:10pt;margin-bottom:5pt;page-break-after:avoid;break-after:avoid}
+    .block ul{gap:3pt}
+    .block ul li{font-size:9pt;line-height:1.5;padding-left:11pt;page-break-inside:avoid;break-inside:avoid}
+    .block ul li::before{top:6pt;width:7pt}
+    .block ul ul li{font-size:8.5pt}
+    .block ul ul li::before{top:6pt;width:5pt}
+
+    /* Projects: 2-col grid, cards don't break */
+    .proj-grid{gap:8pt}
+    .proj-card{padding:10pt 12pt;border-radius:6pt;page-break-inside:avoid;break-inside:avoid;box-shadow:none!important;transform:none!important}
     .proj-card::before,.proj-card::after{display:none}
-    .proj-card,.edu-card{box-shadow:none!important;transform:none!important;border-color:#ddd}
-
-    /* External link arrows still visible */
-    a{color:inherit;text-decoration:none}
+    .proj-card h3{font-size:10.5pt;gap:5pt}
+    .proj-card .tag-now{font-size:6.5pt;padding:2px 5px}
+    .proj-card .meta{font-size:7.5pt}
+    .proj-card .desc{font-size:9pt;line-height:1.5}
+    .proj-card ul{gap:3pt;margin-top:3pt}
+    .proj-card ul li{font-size:8.5pt;padding-left:10pt;page-break-inside:avoid}
+    .proj-card ul li::before{top:5.5pt;width:6pt}
+    .proj-card .stack{font-size:8pt;padding-top:6pt}
+    .proj-card .stack b{font-size:7pt}
     .proj-card .detail-link{display:none!important}
 
-    /* Lists: keep dashes black */
-    .block ul li::before,.proj-card ul li::before{background:#666!important}
+    /* Skills */
+    .skill-row{grid-template-columns:90pt 1fr;gap:18pt;padding:6pt 0;page-break-inside:avoid}
+    .skill-row h4{font-size:8pt}
+    .skill-row .items{font-size:9.5pt;line-height:1.7}
+    .skill-row .items .core{padding:1px 6pt;font-size:9.5pt}
+
+    /* Education */
+    .edu-grid{gap:8pt}
+    .edu-card{padding:10pt 12pt;border-radius:6pt;page-break-inside:avoid;break-inside:avoid;box-shadow:none!important;transform:none!important}
+    .edu-card h3{font-size:10pt}
+    .edu-card .when{font-size:7.5pt}
+    .edu-card .role{font-size:8.5pt;margin-bottom:4pt}
+    .edu-card p{font-size:8.5pt}
+
+    /* Footer */
+    .foot{margin-top:16pt;padding-top:8pt;font-size:8pt}
+
+    /* Make accent strokes/borders print-friendly */
+    .row{border-top-color:#ddd}
+    .skill-row,.proj-card .stack{border-color:#ddd}
+    .block ul li a{color:#000;text-decoration:none}
+    .block ul li a::after{display:none}
   }
 </style>
 </head>
@@ -393,9 +452,8 @@
 
     <div class="hero-top">
       <div class="hero-text">
-        <p class="tagline">시각디자인을 전공한 <em>센스있는 개발자</em></p>
-        <h1 style="font-size: 32px">서유빈<span class="en">Seo Yubin</span></h1>
-        <p class="role"><span class="pill">Backend · Web</span><b>Spring & Kotlin</b> 기반 환전 · 현금 거래 · 결제 도메인의 백오피스를 만듭니다.</p>
+        <p class="tagline">시각디자인을 전공한<br><em>센스있는</em> 백엔드 개발자,<br><span class="name">서유빈입니다.</span></p>
+        <p class="role"><span class="role-tag">Backend · Web</span>Spring & Kotlin 기반 환전 · 현금 거래 · 결제 도메인의 백오피스를 만듭니다.</p>
       </div>
       <aside class="hero-aside" aria-hidden="true">
         <div class="hero-avatar">
@@ -405,7 +463,7 @@
     </div>
 
     <div class="contact">
-      <div><span class="k">Email</span><a class="v" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=dbqls7781@gmail.com" target="_blank" rel="noopener"><span class="__cf_email__" data-cfemail="44202635283773737c75042329252d286a272b29">[email&#160;protected]</span></a></div>
+      <div><span class="k">Email</span><a class="v email-link" data-user="dbqls7781" data-domain="gmail.com" href="#" target="_blank" rel="noopener">loading…</a></div>
       <div><span class="k">Phone</span><a class="v" href="tel:+821082877781">010-8287-7781</a></div>
       <div><span class="k">GitHub</span><a class="v" href="https://github.com/7uckydog" target="_blank" rel="noopener">github.com/7uckydog</a></div>
       <div><span class="k">Detail</span><a class="v" href="dozn-detail.html">상세 경력기술서</a></div>
@@ -738,13 +796,20 @@
 
 </main>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const themeBtn = document.getElementById('theme-btn');
   if(localStorage.getItem('cv-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
   themeBtn.addEventListener('click', () => {
     const cur = document.documentElement.dataset.theme;
     if(cur === 'dark'){ delete document.documentElement.dataset.theme; localStorage.setItem('cv-theme','light'); }
     else { document.documentElement.dataset.theme = 'dark'; localStorage.setItem('cv-theme','dark'); }
+  });
+
+  // Assemble email at runtime so Cloudflare doesn't auto-protect it
+  document.querySelectorAll('.email-link').forEach(el => {
+    const addr = el.dataset.user + '@' + el.dataset.domain;
+    el.textContent = addr;
+    el.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + addr;
   });
 
   // Reveal-on-scroll for sections, cards, and section heads
