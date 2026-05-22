@@ -139,8 +139,9 @@
     border-color:var(--line);border-left-color:var(--accent);transform:translateX(3px);
     box-shadow:0 6px 16px -8px rgba(63,184,189,.25);
   }
-  .case-list li b{color:var(--ink);font-weight:700;display:block;margin-bottom:3px;font-size:14.5px}
-  .case-list li b + span{color:var(--ink-2)}
+  .case-list li > b{color:var(--ink);font-weight:700;display:block;margin-bottom:3px;font-size:14.5px}
+  .case-list li > b + span{color:var(--ink-2)}
+  .case-list li span b{color:var(--ink);font-weight:600;display:inline;background:transparent}
 
   /* outcome box */
   .outcome{
@@ -154,6 +155,47 @@
   }
   .outcome p{margin:0;font-size:15px;line-height:1.7;color:var(--ink)}
   .outcome p em{font-style:normal;color:var(--accent);font-weight:700;background:transparent;padding:0}
+  .outcome .metric{display:flex;flex-wrap:wrap;gap:8px 10px;margin:14px 0 0}
+  .outcome .metric span{
+    font-family:var(--font-en);font-size:12.5px;font-weight:600;color:var(--accent-deep);
+    background:var(--accent-soft);border:1px solid var(--line);padding:5px 11px;border-radius:20px;letter-spacing:.01em;
+  }
+  [data-theme="dark"] .outcome .metric span{color:var(--accent)}
+
+  /* reflect box */
+  .reflect{
+    margin-top:14px;padding:18px 22px 18px 22px;border-radius:12px;
+    background:var(--paper);
+    border:1px solid var(--line);position:relative;max-width:760px;
+  }
+  .reflect::before{
+    content:"LEARNED";position:absolute;top:-9px;left:18px;
+    font-family:var(--font-en);font-size:10px;letter-spacing:.22em;font-weight:700;color:var(--ink-2);
+    background:var(--bg);padding:2px 10px;border-radius:4px;
+  }
+  .reflect p{margin:0;font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+  .reflect p b{color:var(--ink);font-weight:600}
+
+  /* code block */
+  .code{
+    margin:4px 0 2px;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:var(--line-2);max-width:760px;
+  }
+  .code .cap{
+    font-family:var(--font-en);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    padding:7px 14px;border-bottom:1px solid var(--line);font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .code .cap::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .code pre{
+    margin:0;padding:14px 16px;overflow-x:auto;
+    font-family:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    font-size:12.8px;line-height:1.65;color:var(--ink);tab-size:2;
+  }
+  .code .kw{color:var(--accent-deep);font-weight:600}
+  [data-theme="dark"] .code .kw{color:var(--accent)}
+  .code .cm{color:var(--muted)}
+  .code .st{color:#B0743B}
+  [data-theme="dark"] .code .st{color:#D9A066}
 
   /* nav between cases */
   .case-divider{
@@ -206,6 +248,16 @@
     .outcome{margin-top:10pt;padding:10pt 14pt;page-break-inside:avoid;break-inside:avoid;border:1px solid #ddd!important;max-width:none}
     .outcome::before{font-size:7pt;padding:1pt 6pt}
     .outcome p{font-size:9.5pt;line-height:1.6}
+    .outcome .metric{gap:4pt 5pt;margin-top:7pt}
+    .outcome .metric span{font-size:8pt;padding:2pt 7pt;border:1px solid #ccc!important}
+
+    .reflect{margin-top:8pt;padding:9pt 12pt;page-break-inside:avoid;break-inside:avoid;border:1px solid #ddd!important;background:#fff!important;max-width:none}
+    .reflect::before{font-size:7pt;padding:1pt 6pt}
+    .reflect p{font-size:9pt;line-height:1.6}
+
+    .code{margin:4pt 0;page-break-inside:avoid;break-inside:avoid;border:1px solid #ddd!important;background:#f6f6f4!important;max-width:none}
+    .code .cap{font-size:7.5pt;padding:4pt 9pt}
+    .code pre{font-size:8.2pt;line-height:1.55;padding:8pt 10pt;white-space:pre-wrap;word-break:break-word}
 
     .case-divider{margin:14pt 0 0;font-size:7.5pt}
     .foot{margin-top:14pt;padding-top:8pt;font-size:7.5pt}
@@ -215,7 +267,7 @@
 <body>
 
 <div class="toolbar" role="toolbar" aria-label="page tools">
-  <a href="index.html" title="이전으로">← 이전</a>
+  <a href="index.html" title="목록으로">목록</a>
   <button id="theme-btn" type="button">Theme</button>
   <button id="print-btn" class="pdf-btn" type="button">PDF 저장 ↓</button>
 </div>
@@ -229,13 +281,15 @@
     <div class="label">상세 경력기술서 · Case Study</div>
     <h1>DOZN BackOffice</h1>
     <p class="lead">DOZN의 키오스크 사업은 <b>전국에 흩어진 기기에서 매일 현금과 거래가 발생하는 구조이기에, 운영·정산·모니터링이 정교하게 맞물려야 합니다.</b> 다만 실제로는 상당 부분이 이메일·유선·엑셀 등 시스템 바깥의 도구로 처리되고 있었고, 담당자 부재나 단순 누락이 곧바로 시재 불일치·정산 지연으로 이어지는 구조였습니다.</p>
-    <p class="lead">이 업무들을 <b>도메인 모델로 다시 설계하여 시스템 안으로 옮기는 작업</b>을 진행했습니다. <em>자산 이동 워크플로우 · 업체별 정산·대사 자동화 · 실시간 대시보드</em> 세 가지 축으로 나눠 진행했고, 운영팀·재무팀·경영진이 같은 데이터를 기준으로 움직일 수 있도록 묶는 데 초점을 뒀습니다.</p>
-    <p class="lead">아래 세 개의 케이스는 그 과정에서 풀어낸 문제와 설계 의도, 도입 후 달라진 점을 정리한 기록입니다.</p>
+    <p class="lead">이 업무들을 <b>도메인 모델로 다시 설계하여 시스템 안으로 옮기는 작업</b>을 진행했습니다. <em>자산 이동 워크플로우 · 정산 자동화 · 쿼리 전략 전환 · 실시간 운영 대시보드</em> 네 가지 축으로 나눠 진행했고, 운영팀·재무팀·경영진이 같은 데이터를 기준으로 움직일 수 있도록 묶는 데 초점을 뒀습니다.</p>
+    <p class="lead">각 작업은 <em>기획서·Figma 검토부터 ERD 설계, 백엔드 개발, 운영까지 전 과정에 직접 참여</em>했습니다. 화면 기획 단계에서 데이터 흐름을 함께 정의하고, 그에 맞는 테이블 구조를 설계한 뒤 구현으로 이어가는 방식이라, 단순 기능 구현이 아니라 <b>요구사항부터 데이터 모델까지 일관된 의도로 묶는 것을 지향했습니다.</b></p>
+    <p class="lead">아래 네 개의 케이스는 그 과정에서 풀어낸 <b>문제와 설계 의도, 핵심 구현 근거, 그리고 도입 후 달라진 점과 배운 점</b>을 정리한 기록입니다.</p>
     <div class="meta-line">
       <div><span class="k">Company</span><span class="v">(주)더즌 DOZN</span></div>
       <div><span class="k">Role</span><span class="v">키오스크 개발팀 매니저</span></div>
+      <div><span class="k">Scope</span><span class="v">기획·Figma → ERD 설계 → 개발 → 운영</span></div>
       <div><span class="k">Period</span><span class="v">2024.07 — 현재</span></div>
-      <div><span class="k">Stack</span><span class="v">Kotlin · Spring Boot · JPA · Querydsl · MySQL · Next.js · Tailwind CSS · Zod</span></div>
+      <div><span class="k">Stack</span><span class="v">Kotlin · Spring Boot · JPA · Querydsl · Querydsl-SQL · MyBatis · MySQL · Redis</span></div>
     </div>
   </header>
 
@@ -245,31 +299,56 @@
       <div class="case-no">Case 01</div>
       <h2>자산 이동 워크플로우 시스템화</h2>
     </div>
+    <p style="font-size:16.5px;color:var(--ink);font-weight:500;margin-bottom:24px">키오스크 현금 보충·회수·재배치 등 현물 자산이 움직이는 업무를, <b>상태머신 기반 도메인 모델</b>로 시스템 안에 옮긴 작업입니다.</p>
 
     <h3>문제 상황</h3>
-    <p>키오스크 현금 보충·회수·재배치 등 현물 자산이 움직이는 업무가 시스템 없이 사람 간 커뮤니케이션에 의존하고 있었습니다. 운영 관리자가 이메일과 유선으로 수송을 지시하고, 작업 결과는 엑셀에 수기로 정리해 공유하는 구조였기 때문에 <b>업무 흐름이 시스템 바깥에 존재하는 상태</b>였습니다.</p>
-    <p>이로 인해 다음과 같은 문제가 반복적으로 발생했습니다.</p>
+    <p>자산이 움직이는 업무가 시스템 없이 사람 간 커뮤니케이션에 의존하고 있었습니다. 운영 관리자가 이메일·유선으로 수송을 지시하고 작업 결과는 엑셀에 수기로 정리해 공유하다 보니, <b>업무 흐름 자체가 시스템 바깥에 존재하는 상태</b>였고 다음과 같은 문제가 반복됐습니다.</p>
     <ul class="case-list">
-      <li><b>현금 수송 요청 누락</b><span>구두·이메일 지시 특성상 수신자가 인지하지 못한 채 지나가는 케이스가 있었고, 누락 사실은 추후 시재 불일치가 확인된 뒤에야 발견되는 경우가 많았습니다.</span></li>
-      <li><b>데이터 대사 불일치</b><span>운영팀 엑셀, 재무팀 엑셀, 어드민 데이터가 각각 따로 관리되다 보니 같은 건이 서로 다르게 기록되는 일이 잦았습니다.</span></li>
-      <li><b>담당자 부재 시 소통 단절</b><span>특정 담당자만 맥락을 알고 있는 작업이 많아서, 휴가나 외근으로 부재할 경우 작업이 멈추거나 잘못된 정보로 진행되는 휴먼 에러가 발생했습니다.</span></li>
-      <li><b>전체 흐름 가시성 부재</b><span>어떤 키오스크에 어떤 작업이 어느 단계까지 진행됐는지 한 화면에서 볼 수 없어서, 작업자가 매번 개별로 상태를 확인해야 하는 비효율이 누적됐습니다.</span></li>
+      <li><b>수송 요청 누락</b><span>구두·이메일 지시 특성상 수신자가 인지하지 못한 채 지나가는 경우가 있었고, 누락은 추후 시재가 안 맞을 때야 발견됐습니다.</span></li>
+      <li><b>데이터 대사 불일치</b><span>운영팀 엑셀, 재무팀 엑셀, 어드민 데이터가 따로 관리돼 같은 건이 서로 다르게 기록되곤 했습니다.</span></li>
+      <li><b>담당자 부재 시 단절</b><span>특정 담당자만 맥락을 아는 작업이 많아, 휴가·외근 시 작업이 멈추거나 잘못된 정보로 진행되는 휴먼 에러가 발생했습니다.</span></li>
+      <li><b>전체 흐름 가시성 부재</b><span>어떤 키오스크에 어떤 작업이 어디까지 진행됐는지 한 화면에서 볼 수 없어, 매번 개별 확인이 필요했습니다.</span></li>
     </ul>
 
     <h3>해결 과정</h3>
-    <p>먼저 자산 운영 관리자, 재무팀과 함께 실제 현금 수송이 어떤 순서로 일어나고, 각 단계에서 누가 무엇을 결정하며, 어떤 예외 케이스(긴급 보충, 회수, 점검 동반 작업 등)가 있는지를 정리했습니다.</p>
-    <p>이렇게 정리한 흐름을 바탕으로 <b>자산 이동 작업의 생명주기를 도메인 모델로 정의</b>하고, 다음과 같은 규칙을 도메인 레이어에 응집시켰습니다.</p>
+    <p>자산 운영 관리자·재무팀과 함께 실제 현금 수송이 어떤 순서로 일어나고 각 단계에서 누가 무엇을 결정하는지, 어떤 예외 케이스(긴급 보충·회수·점검 동반 작업)가 있는지 정리한 뒤, <b>기획·화면 흐름 정의부터 ERD 설계, 구현까지 직접 진행</b>하며 작업의 생명주기를 도메인 모델로 정의했습니다.</p>
     <ul class="case-list">
-      <li><b>상태 전이 규칙 + 동시성 제어</b><span>요청 → 수락 → 진행 → 완료 → 대사 확정으로 이어지는 단계 사이에 허용되는 전이만 명시적으로 정의하고, 비정상적인 상태 점프는 도메인 차원에서 차단했습니다. 같은 수송 건을 여러 담당자가 동시에 처리하려는 충돌은 <b>비관적 락(SELECT FOR UPDATE) + 상태 enum 가드</b>로 이중 차단해, 후순위 요청은 즉시 실패하고 명확한 원인을 돌려받을 수 있도록 만들었습니다.</span></li>
-      <li><b>실시간 시재 기반 입력 검증</b><span>키오스크에서 실시간으로 올라오는 시재 데이터를 기준으로, 작업 입력 시점부터 보유 시재를 초과한 출고·음수 시재 같은 비정상 케이스를 도메인 차원에서 막았습니다. 같은 검증 로직이 서비스 레이어 여러 곳에 흩어져 있던 것을 도메인 하나에 응집시켰습니다.</span></li>
-      <li><b>정합성 검증 로직</b><span>키오스크 시재, 운영팀 보유 현금, 송금/입금 데이터와의 정합성 검사를 한 곳에 응집시켜서, 동일한 검증 로직이 여러 레이어에 흩어져 중복되는 문제를 없앴습니다.</span></li>
-      <li><b>작업 단위 이력화</b><span>요청, 수락, 연락, 메모, 대사, 작업 정보 입력 등 모든 액션을 작업 단위로 이력화해 사후 추적이 가능하도록 설계했습니다.</span></li>
+      <li><b>상태 전이 제어</b><span>작업 생명주기(요청 → 진행중 → 정보 입력 → 정보 확인 → 완료 확정, 취소)를 <b>enum의 단계 값(stepOrder)으로 정의</b>하고, 상태를 변경할 때 <b>메모리 값을 믿지 않고 DB에서 현재 상태를 다시 조회</b>해 검증했습니다. 현재 단계에서 바로 다음 단계로 넘어가는 게 맞는지를 확인하고, 단계를 건너뛰는 비정상 전이(요청 단계에서 곧바로 완료로 점프 등)는 예외를 던져 차단했습니다. 동시 요청으로 상태가 이미 바뀐 경우에도 최신 DB 값을 기준으로 판단하도록 한 것입니다.</span></li>
+      <li><b>정합성 검증 응집</b><span>키오스크 시재, 운영팀 보유 현금, 송금·입금 데이터와의 정합성 검사를 한 곳에 모아, 동일한 검증 로직이 여러 레이어에 흩어져 중복되는 문제를 없앴습니다.</span></li>
+      <li><b>작업 단위 이력화</b><span>상태·데이터 변경은 <b>JPA Auditing</b>으로 변경 주체와 시점을 자동 적재하고, 현금 수송 고유의 액션(요청·수락·연락·메모·대사 등)은 별도의 전용 이력 테이블에 <b>append-only</b>로 적재해 사후 추적과 책임 소재 확인이 가능하게 했습니다.</span></li>
+      <li><b>알림 분리</b><span>단계가 바뀔 때마다 담당자에게 자동 이메일이 가도록 하되, 알림을 핵심 트랜잭션과 분리했습니다. 정보 입력·상태 변경 트랜잭션이 정상 커밋된 이후 이벤트 리스너를 통해 <b>비동기로 발송되도록 구성</b>해, 알림 처리가 핵심 비즈니스 트랜잭션의 성능이나 성공 여부에 영향을 주지 않게 했습니다.</span></li>
     </ul>
-    <p>그 위에 UI를 얹어서 수송 사이클 전체를 시각화했고, 단계가 바뀔 때마다 관련 담당자에게 자동 이메일 알림이 가도록 했습니다. <em>담당자가 부재여도 작업이 멈추지 않고 인계될 수 있는 구조</em>를 만든 거죠.</p>
-    <p>특히 기존에 따로 관리되던 사내 보유 시재와 키오스크 실시간 시재 정보에 이 모듈을 연결한 부분이 중요했습니다. 자산 이동이 별개 기능이 아니라 회사 전체 자산 흐름의 한 축이 되도록 묶었고, 그 결과 운영팀과 재무팀이 같은 데이터를 보고 의사결정할 수 있는 기준이 만들어졌습니다.</p>
+    <p>특히 기존에 따로 관리되던 사내 보유 시재와 키오스크 실시간 시재 정보에 이 모듈을 연결한 부분이 중요했습니다. 자산 이동이 별개 기능이 아니라 <em>전사 자산 흐름의 한 축이 되도록 묶어</em>, 운영팀과 재무팀이 같은 데이터를 보고 의사결정할 수 있는 기준을 만들었습니다.</p>
+
+    <div class="code">
+      <div class="cap">상태 전이 검증 — 현재 상태를 DB에서 조회 후 단계(stepOrder) 검증</div>
+<pre><span class="kw">enum class</span> CashTransportTaskStatus(
+  <span class="kw">val</span> value: String, <span class="kw">val</span> description: String, <span class="kw">val</span> stepOrder: Int,
+) {
+  REQUESTED(<span class="st">"REQUESTED"</span>, <span class="st">"현금 수송 작업 요청"</span>, 1),
+  IN_PROGRESS(<span class="st">"IN_PROGRESS"</span>, <span class="st">"작업 진행중"</span>, 2),
+  INFO_FILLED(<span class="st">"INFO_FILLED"</span>, <span class="st">"작업 내역 정보 입력 완료"</span>, 3),
+  INFO_FILLED_RETRY(<span class="st">"INFO_FILLED_RETRY"</span>, <span class="st">"작업 정보 재입력 요청"</span>, 4),
+  INFO_CONFIRMED(<span class="st">"INFO_CONFIRMED"</span>, <span class="st">"작업 정보 확인"</span>, 5),
+  CONFIRMED_COMPLETION(<span class="st">"CONFIRMED_COMPLETION"</span>, <span class="st">"작업 완료 확정"</span>, 6),
+  CANCELED(<span class="st">"CANCELED"</span>, <span class="st">"작업 취소"</span>, 7);
+}
+
+<span class="cm">// 메모리 상태를 믿지 않고 DB에서 현재 상태를 다시 조회해 검증</span>
+<span class="kw">val</span> task = taskRepository.findById(taskId).orElseThrow()
+require(next.stepOrder == task.status.stepOrder + 1) {
+  <span class="st">"허용되지 않은 전이: ${task.status} → $next"</span>   <span class="cm">// 단계 점프 차단</span>
+}
+task.status = next</pre>
+    </div>
 
     <div class="outcome">
-      <p>도입 이후 <em>수송 요청 누락이 거의 사라졌고</em>, 월말 시재 대사에 들어가던 시간이 많이 줄었습니다.</p>
+      <p>수송 요청 누락이 거의 사라졌고, <em>담당자가 부재해도 작업이 멈추지 않고 인계되는 구조</em>가 됐습니다. 월말 시재 대사에 들어가던 시간도 크게 줄었습니다.</p>
+      <div class="metric"><span>수송 요청 누락 → 거의 0</span><span>담당자 부재에도 작업 연속성 확보</span><span>월말 대사 시간 단축</span></div>
+    </div>
+
+    <div class="reflect">
+      <p>업무를 코드로 옮길 때 가장 중요한 건 '기능'이 아니라 <b>'허용되지 않는 일을 막는 규칙'</b>이라는 걸 배웠습니다. 또한 상태 검증은 메모리에 들고 있던 값이 아니라 <b>그 순간의 실제 DB 상태를 기준</b>으로 해야 동시 요청에도 안전하다는 점을 체감했습니다. 덕분에 담당자가 바뀌거나 요청이 겹쳐도 시스템이 잘못된 진행을 스스로 거부하는 구조가 됐습니다.</p>
     </div>
   </section>
 
@@ -279,31 +358,49 @@
       <div class="case-no">Case 02</div>
       <h2>나이스 · 이즐(eZL) 정산 자동화</h2>
     </div>
+    <p style="font-size:16.5px;color:var(--ink);font-weight:500;margin-bottom:24px">매일 수기로 대사·송금하던 정산 프로세스를, <b>스케줄러 기반 자동 파이프라인</b>으로 전환한 작업입니다.</p>
 
     <h3>문제 상황</h3>
-    <p>재무팀의 정산·대사 업무는 회사 현금 흐름과 직접 연결되는 핵심 프로세스인데, 거의 전적으로 수작업에 의존하고 있었습니다. 연동 업체가 매일 올려주는 대사 파일을 담당자가 직접 받아서, 어드민에 쌓인 거래 내역과 한 건씩 눈으로 비교한 뒤 수기로 송금하는 구조였어요.</p>
-    <p>이 구조는 단순히 처리가 느린 문제를 넘어 다음과 같은 리스크를 안고 있었습니다.</p>
+    <p>재무팀의 정산·대사 업무는 회사 현금 흐름과 직결되는 핵심 프로세스인데도 거의 전적으로 수작업에 의존하고 있었습니다. 연동 업체가 매일 올려주는 대사 파일을 담당자가 직접 받아, 어드민에 쌓인 거래 내역과 한 건씩 눈으로 비교한 뒤 수기로 송금하는 구조였습니다.</p>
     <ul class="case-list">
-      <li><b>휴먼 에러 누적</b><span>거래 건수가 늘수록 수기 비교 과정에서 발생하는 누락·중복·오매칭이 비례해서 늘었습니다.</span></li>
-      <li><b>담당자 부재 시 대사 지연</b><span>대사 업무가 특정 담당자에게 몰려 있어서 부재 시 정산이 하루 이상 밀리는 일이 잦았습니다.</span></li>
-      <li><b>누적 데이터 관리의 비효율</b><span>일별 엑셀이 매일 새로 만들어지면서 누적 통계나 과거 시점 추적이 어려워, 지난 기간 데이터를 다시 보는 데 상당한 비용이 들었습니다.</span></li>
-      <li><b>업체별 정산 방식의 비표준성</b><span>가장 큰 난점이었습니다. 일반 승인 거래 외에 당일 승인 취소, 사후 매입 취소, 상계 처리, 수수료 차감 방식 등이 업체마다 달랐는데, 이게 시스템화되어 있지 않아서 계약서 원문이나 과거 이메일 협의 이력을 다시 찾아야 정상 대사가 가능했습니다.</span></li>
+      <li><b>휴먼 에러 누적</b><span>거래 건수가 늘수록 수기 비교 과정의 누락·중복·오매칭이 비례해 늘었습니다.</span></li>
+      <li><b>담당자 부재 시 지연</b><span>대사 업무가 특정 담당자에게 몰려 있어, 부재 시 정산이 하루 이상 밀리는 일이 잦았습니다.</span></li>
+      <li><b>누적 데이터 관리 비효율</b><span>일별 엑셀이 매일 새로 만들어져, 누적 통계나 과거 시점 추적에 상당한 비용이 들었습니다.</span></li>
+      <li><b>업체별 정산 방식의 비표준성</b><span>가장 큰 난점이었습니다. 일반 승인 거래 외에 당일 승인 취소, 사후 매입 취소, 상계 처리, 수수료 차감 방식이 업체마다 달랐는데, 시스템화되어 있지 않아 계약서 원문이나 과거 이메일 협의 이력을 다시 찾아야 정상 대사가 가능했습니다.</span></li>
     </ul>
 
     <h3>해결 과정</h3>
-    <p>영업팀, 재무팀과 함께 업체별 정산·대사 프로세스를 처음부터 다시 분해했습니다. 계약서, 운영 메모, 과거 이슈 이력에 흩어져 있던 룰을 한곳에 모아 <b>업체별로 정형화된 규칙 셋</b>으로 재정의했고, 이를 기반으로 자동 대사·송금 파이프라인을 설계했습니다.</p>
-    <p>주요 구성은 다음과 같습니다.</p>
+    <p>영업팀·재무팀과 함께 업체별 정산·대사 프로세스를 처음부터 다시 분해하고, 계약서·운영 메모·과거 이슈에 흩어져 있던 룰을 한곳에 모아 <b>업체별 정형화된 규칙 셋</b>으로 재정의했습니다. 이 규칙을 바탕으로 <b>처리 단계별 ERD를 직접 설계</b>하고 그 위에 자동 파이프라인을 구현했습니다.</p>
     <ul class="case-list">
-      <li><b>스케줄링 기반 자동 처리</b><span>일일 대사, 주간 대사, 거래 단위 대사 등 업체별 정산 주기에 맞춰 스케줄러로 자동 실행되도록 구성했습니다. 정상 케이스는 사람 손 안 타고 끝까지 처리되는 게 기본값입니다.</span></li>
-      <li><b>원본 데이터 보존</b><span>업체에서 받은 파일 원본을 그대로 저장하는 단계, 정규화된 대사용 데이터로 변환하는 단계, 사내 거래 데이터와 비교한 결과를 보관하는 단계를 분리했습니다. 추후 분쟁이 생겼을 때 업체가 보낸 원본을 그대로 확인할 수 있도록 보장하기 위함이었습니다.</span></li>
-      <li><b>송금 멱등성 + 재시도 전략</b><span>돈을 보내는 시스템인 만큼 같은 송금이 두 번 실행되지 않도록 거래 ID 기반 <b>멱등성 키로 이중 보호</b>하고, 외부 API 실패 시 지수 백오프로 재시도 — 일정 횟수를 초과하면 자동 중단 후 담당자 알림으로 전환되도록 설계했습니다.</span></li>
-      <li><b>이메일 + 슬랙 이중 알림</b><span>대사 불일치·이상 감지 시 재무팀·영업팀이 상주하는 슬랙과, 공식 기록을 남기는 이메일을 동시에 발송합니다. 추가로 자금팀·협력사 담당자에게도 상황별 메일이 자동 발송되도록 해, 어느 채널 하나만 놓쳐도 이슈가 숨어버리지 않도록 이중화했습니다.</span></li>
-      <li><b>백오피스 조회 기능</b><span>누적 정산·대사 데이터를 백오피스에서 실시간으로 볼 수 있게 해서, 별도 엑셀 없이 원하는 기간·업체·거래 유형으로 조회할 수 있게 했습니다.</span></li>
-      <li><b>확정 · 송금 분리 로직</b><span>자동 대사를 통과한 건이라도 바로 송금되지 않고, 재무팀의 명시적 확정 액션이 있어야 송금되도록 분리했습니다. 자동화의 편의성과 자금 집행 통제권 사이에서 균형을 잡기 위해 의도적으로 나눈 설계입니다.</span></li>
+      <li><b>스케줄러-로직 분리</b><span><b>별도 스케줄러 전용 애플리케이션</b>에서 cron 기반으로 고도화 백오피스 API를 호출하는 구조로 분리해, 스케줄 변경이나 수동 재실행이 백오피스 비즈니스 로직에 영향을 주지 않도록 했습니다. 정상 케이스는 사람 손을 타지 않고 끝까지 처리되는 게 기본값입니다.</span></li>
+      <li><b>단계별 테이블 분리</b><span>처리 단계별로 테이블을 나눠 각 단계의 책임과 추적성을 확보했습니다. 파트너사가 보낸 파일을 가공 없이 보관하는 <b>원본 적재 테이블</b>(분쟁 시 원본 대조용), 대사 성공 여부와 거래 단위 데이터를 담는 <b>대사 완료 테이블</b>, 파트너사 구분 없이 정산 금액을 통합 집계하는 <b>정산 집계 테이블</b>, 송금 결과값·재시도 횟수를 담는 <b>송금 완료 테이블</b>로 구성했습니다. 정산 외 사외 송금까지 포함하는 <b>통합 송금 원장</b>에도 함께 적재해 전사 자금 집행 내역을 한곳에서 볼 수 있게 했습니다. 송금 자체는 사내 송금 개발팀과 협업해 처리하며, 그쪽에서 내려주는 결과값과 재시도 이력을 송금 완료 테이블에 적재합니다.</span></li>
+      <li><b>중복 처리 방지</b><span>돈이 오가는 만큼 <em>중복 송금 방지에 가장 신경</em> 썼습니다. 정산·송금 테이블에 <b>날짜 + 파트너사를 유니크 키</b>로 두어 동일 건의 중복 처리를 DB 레벨에서 차단하고(대사 테이블은 거래 건 단위라 제외), 모든 정산·송금 프로세스 시작 전에 당일 이미 처리된 건이 있는지 사전 검증하는 로직을 두어 스케줄러 중복 실행이나 재실행 시에도 이중 송금이 발생하지 않게 했습니다.</span></li>
+      <li><b>정산 예정일시 기반 송금</b><span>모든 정산 데이터에 파트너사별 주기를 계산한 <b>정산 예정 일시</b>를 부여하고, 송금 스케줄러가 당일 예정이면서 아직 송금되지 않은 건만 조회해 처리하도록 해, 업체별로 다른 정산 주기를 <em>단일 스케줄러로 일관되게 처리</em>했습니다.</span></li>
+      <li><b>실패 정책</b><span>대사 실패 시에는 <b>부분 처리 없이 해당 건을 통째로 보류</b>합니다. 실패 원인이 자사 데이터뿐 아니라 파트너사 측 오류일 수 있어(이 경우 대사 파일을 다시 받아야 합니다) 잘못된 데이터로 후속 정산·송금이 진행되는 것을 막기 위한 의도적 설계입니다. 보류 건은 원인 파악 및 조치 후 재진행합니다.</span></li>
+      <li><b>확정-송금 분리</b><span>자동 대사를 통과한 건이라도 바로 송금되지 않고, <b>재무팀의 명시적 확정 액션</b>이 있어야 송금되도록 분리했습니다. 자동화의 편의성과 자금 집행 통제권 사이에서 균형을 잡기 위한 의도적 설계입니다. 또한 파이프라인 각 단계 사이에 Slack 알림을 연동해, 불일치 발견 시점을 월말에서 당일로 앞당겼습니다.</span></li>
     </ul>
 
+    <div class="code">
+      <div class="cap">중복 송금 방지 — DB 유니크 제약 + 사전 검증 이중 안전장치</div>
+<pre><span class="cm">// ① 정산·송금 테이블: (정산일자 + 파트너사) 단위로 1건만 허용 — DB 레벨 차단</span>
+@Table(uniqueConstraints = [
+  UniqueConstraint(columnNames = [<span class="st">"settle_date"</span>, <span class="st">"partner_id"</span>])
+])
+
+<span class="cm">// ② 프로세스 진입 전 사전 검증 — 스케줄러 중복 실행·재실행 시 이중 처리 차단</span>
+<span class="kw">if</span> (settlementRepository.existsBySettleDateAndPartner(today, partner)) {
+  log.warn(<span class="st">"이미 처리된 정산 건 — 스킵: {} / {}"</span>, today, partner)
+  <span class="kw">return</span>
+}</pre>
+    </div>
+
     <div class="outcome">
-      <p>도입 후 정산 업무가 특정 담당자에게 묶이지 않게 됐고, 불일치 발견 시점이 "월말 정리 중"에서 <em>"당일 슬랙 알림"</em>으로 앞당겨졌습니다. 재무팀이 단순 비교 작업에서 벗어나 예외 케이스 판단·협의 같은 사람이 해야 할 일에 집중할 수 있게 됐습니다.</p>
+      <p>정산 업무가 특정 담당자에게 묶이지 않게 됐고, 불일치 발견 시점이 "월말 정리 중"에서 <em>"당일 슬랙 알림"</em>으로 앞당겨졌습니다. 재무팀이 단순 비교 작업에서 벗어나 예외 케이스 판단·협의 같은 사람이 해야 할 일에 집중할 수 있게 됐습니다.</p>
+      <div class="metric"><span>불일치 발견: 월말 → 당일</span><span>수기 대사·송금 → 자동화</span><span>담당자 종속성 해소</span></div>
+    </div>
+
+    <div class="reflect">
+      <p>돈이 오가는 자동화에서 중요한 건 처리 속도가 아니라 <b>'틀렸을 때 멈추고 추적할 수 있는 구조'</b>라는 걸 배웠습니다. 그래서 실패 시 통째 보류, 단계별 원본 보존, 확정-송금 분리를 의도적으로 선택했습니다. 자동화의 편의와 자금 통제권 사이의 균형이 핵심이었습니다.</p>
     </div>
   </section>
 
@@ -311,32 +408,105 @@
   <section class="case">
     <div class="head">
       <div class="case-no">Case 03</div>
-      <h2>실시간 대시보드 개발</h2>
+      <h2>가상계좌 입금 조회 쿼리 전략 전환기</h2>
     </div>
+    <p style="font-size:16.5px;color:var(--ink);font-weight:500;margin-bottom:24px">서로 다른 출처의 가상계좌 입금 내역을 통합 조회하는 기능을 만들며, 쿼리 작성 전략을 단계적으로 전환하고 <b>팀의 쿼리 기준을 새로 세운</b> 작업입니다.</p>
 
     <h3>문제 상황</h3>
-    <p>기존 백오피스에 거래 내역, 키오스크 상태, 환율·스프레드, 경쟁사 데이터가 다 있긴 했지만, <b>각 정보가 별도 페이지에 흩어져 있는 구조</b>였습니다. 데이터는 있는데 한눈에 볼 수 있는 화면이 없는 상태였습니다.</p>
-    <p>그래서 회계팀이 매일 다음 작업을 반복하고 있었습니다.</p>
+    <p>가상계좌 입금 내역 조회 기능을 개발하던 중 기존 방식의 한계에 부딪혔습니다.</p>
     <ul class="case-list">
-      <li><b>1. 페이지 순차 진입</b><span>백오피스 여러 페이지에 순차적으로 들어가 데이터를 확인.</span></li>
-      <li><b>2. 다축 조회 · 다운로드</b><span>일별·통화별·국가별·키오스크별 거래 내역을 각각 조회하고 다운로드.</span></li>
-      <li><b>3. 엑셀 가공</b><span>받은 엑셀을 가공·조합해서 일일 리포트로 정리.</span></li>
-      <li><b>4. 이메일 발송</b><span>정리된 리포트를 이메일로 사내에 발송.</span></li>
+      <li><b>문자열 조립의 디버깅 난해</b><span>입금 조회 쿼리가 <b>createNativeQuery에 StringBuilder로 SQL 문자열을 이어붙이는 방식</b>이었습니다. SQL이 단순 문자열이라 컬럼명·괄호·콤마·공백을 틀려도 <b>컴파일은 정상 통과</b>하고, 실제 실행해봐야(런타임) 오류를 알 수 있었습니다. 그마저도 "SQL 문법 오류" 수준으로만 떠서 긴 문자열 어디가 틀렸는지 짚어주지 않았고, 조건이 분기될수록 자바 코드와 최종 SQL의 대응 관계를 추적하기 어려웠습니다.</span></li>
+      <li><b>다중 출처 통합 조회 요구</b><span>가상계좌 입금원이 <b>더프리(자체 선불카드 충전)</b>와 <b>온라인 환전 신청</b> 등 여러 곳이라, 입금 내역을 한 화면에서 보려면 <b>서로 다른 테이블을 UNION ALL로 합쳐 조회</b>해야 했습니다. 출처가 늘어날수록 쿼리는 더 길고 복잡해질 수밖에 없는 구조였습니다.</span></li>
     </ul>
-    <p>리포트는 매일 만들어졌지만 <b>실시간성이 없다는 점</b>이 가장 큰 한계였습니다. 운영 중 이슈가 생기면 결국 백오피스를 다시 열어 여러 페이지를 오가며 확인해야 했고, 회계팀에 별도 요청을 보내는 일이 잦았습니다.</p>
 
     <h3>해결 과정</h3>
-    <p>서비스 기획팀과 함께 사용자별(회계팀·운영팀·경영진) 정보 니즈를 정리하고, <b>어떤 데이터가 한 화면에 같이 있어야 의미가 있는지</b>부터 정의했습니다. 이후 백오피스 파트 내에서 도메인 단위로 업무를 분할해 다음 영역을 구성했습니다.</p>
+    <p>"디버깅 가능성"과 "UNION 지원"이라는 두 요구를 동시에 만족하는 방법을 단계적으로 찾아갔고, 그 과정에서 팀의 쿼리 작성 도구 자체를 두 번 확장했습니다.</p>
     <ul class="case-list">
-      <li><b>거래 유형별 실시간 현황</b><span>원화·외화 거래, 카드 구매·충전·출금, 택스리펀드를 축으로 두고 각 축별 거래 현황을 실시간으로 시각화. 같은 "거래"지만 비즈니스적으로 성격이 전혀 다른 흐름을 사용자가 직관적으로 분리해서 볼 수 있게 한 게 핵심이었습니다.</span></li>
-      <li><b>토탈 키오스크 실시간 현황 및 알림</b><span>전국에 분산된 키오스크의 상태(정상·이슈·점검 등)와 알림 이력을 한 화면에 모았습니다. 운영팀이 별도 모니터링 도구 없이 이상 징후를 바로 확인할 수 있게 했습니다.</span></li>
-      <li><b>경쟁사 환율 비교</b><span>사내 환율과 스프레드 데이터를 기준으로 경쟁사 환율을 함께 조회할 수 있는 기능. 단순 모니터링을 넘어 환율 정책 의사결정에 직접 활용되는 부분이었습니다.</span></li>
+      <li><b>1차 검토 — JPAQueryFactory의 한계</b><span>가장 먼저 팀에서 평소 쓰던 <b>JPAQueryFactory</b>(Querydsl-JPA)를 검토했습니다. 타입 세이프해서 디버깅 문제는 해결되지만, 이건 <b>JPQL로 변환되는 구조라 UNION을 지원하지 않습니다</b>. 다중 출처 통합 조회라는 핵심 요구를 충족할 수 없어 다른 방법이 필요했습니다.</span></li>
+      <li><b>2차 도입 — SQLQueryFactory (팀 최초)</b><span>그래서 <b>Querydsl-SQL의 SQLQueryFactory를 팀에서 처음 도입</b>했습니다. JPA(JPQL)를 거치지 않고 실제 DB SQL을 <b>타입 세이프하게</b> 작성하는 방식이라, UNION ALL을 지원하면서도 컴파일 시점에 오류를 잡을 수 있었습니다. 문자열 조립에서 겪던 "어디가 틀렸는지 모르는" 문제와 UNION 미지원 문제를 한 번에 해소했습니다.</span></li>
+      <li><b>한계 인지 — 코드 조립의 복잡도</b><span>다만 운영하며 또 다른 한계가 보였습니다. 타입 안정성은 좋지만, <b>UNION에 조건이 많이 붙는 통계성 쿼리를 자바 코드로 조립</b>하다 보니 소스가 방대하고 복잡해져, 오히려 SQL 원문보다 읽기 어려워지는 경우가 생겼습니다. "타입 세이프"가 모든 쿼리에서 정답은 아니라는 판단에 이르렀습니다.</span></li>
+      <li><b>3차 도입 — MyBatis (신규 도입)</b><span>복잡한 통합 조회는 <b>SQL을 원문 그대로 작성하는 게 더 명확</b>하다고 판단해, <b>MyBatis를 도입</b>했습니다. 단순·동적 조건은 Querydsl로, 길고 복잡한 통합·통계 조회는 MyBatis로 가는 식으로, 쿼리 성격에 따라 도구를 나눠 쓰는 기준을 세웠습니다.</span></li>
     </ul>
-    <p>기술적으로는 데이터 성격에 맞춰 <em>소켓과 폴링을 의도적으로 분리</em>했습니다. 키오스크 알림·이상 상태처럼 <b>즉시성이 필수이고 발생 빈도가 낮은 이벤트는 소켓 푸시</b>로 보내 사용자가 새로고침 없이 0초에 가까운 반영을 보장하고, <b>변경 빈도가 높은 집계 데이터(거래·환율 비교 등)는 폴링</b>으로 처리해 사용자가 화면을 보고 있을 때만 갱신되도록 했습니다. 모든 데이터를 소켓으로 연결해두면 클라이언트 수만큼 서버 자원이 낭비되고, 변경이 잦은 데이터를 폴링으로만 가져오면 DB 부하가 누적되기 때문에 — <em>비용·부하·UX 셋의 균형</em>을 맞춘 분리였습니다.</p>
-    <p>또한 <em>신규 거래 서비스가 추가됨에 따라</em> 지속적 서포트를 진행하며 <em>대시보드를 확장</em>해오고 있습니다.</p>
+
+    <div class="code">
+      <div class="cap">조회 전략 선택 기준 — 쿼리 성격에 따른 도구 분리</div>
+<pre><span class="cm">// 단순 CRUD·동적 조건  →  JPAQueryFactory (타입 세이프, 가장 간결)</span>
+<span class="cm">// 다중 테이블 UNION    →  SQLQueryFactory (JPQL 미지원 UNION 처리 + 타입 세이프)</span>
+<span class="cm">// 길고 복잡한 통계 조회 →  MyBatis (SQL 원문이 더 가독성 높음)</span>
+
+<span class="cm">// 가상계좌 입금 통합 조회 — 더프리 충전 + 온라인 환전을 UNION ALL</span>
+<span class="kw">val</span> union: SubQueryExpression&lt;Tuple&gt; = SQLExpressions.unionAll(
+  prepaidChargeQuery,   <span class="cm">// 더프리 선불카드 충전 입금 쿼리</span>
+  exchangeRequestQuery  <span class="cm">// 온라인 환전 신청 입금 쿼리</span>
+)
+
+<span class="cm">// union 결과를 서브쿼리로 두고 PathBuilder로 별칭(u)을 잡아 조회</span>
+<span class="kw">val</span> u = PathBuilder(Tuple::<span class="kw">class</span>.java, <span class="st">"u"</span>)
+sqlQueryFactory.query()
+  .select(Wildcard.count)
+  .from(union, u)
+  .fetchOne()</pre>
+    </div>
 
     <div class="outcome">
-      <p>도입 후 회계팀의 리포트 가공·발송 업무가 많이 줄었고, <em>의사결정자가 메일을 기다리지 않고 필요한 순간에 직접 대시보드를 열어 상황을 확인</em>할 수 있게 됐습니다.</p>
+      <p>쿼리 성격에 따라 도구를 나눠 쓰는 기준이 생겼습니다. <em>타입 안정성이 중요한 구간은 Querydsl-SQL로, 복잡한 통합 조회는 MyBatis로</em>. 한 번의 선택으로 끝내지 않고 한계가 보일 때마다 다시 판단한 과정이, <em>팀의 쿼리 작성 기준</em>으로 남았습니다.</p>
+      <div class="metric"><span>SQLQueryFactory 신규 도입</span><span>MyBatis 신규 도입</span><span>런타임 → 컴파일 시점 오류 검출</span></div>
+    </div>
+
+    <div class="reflect">
+      <p><b>'더 나은 도구'는 고정된 정답이 아니라 쿼리 성격에 따라 달라진다</b>는 걸 체감했습니다. 타입 안정성이 중요한 구간은 Querydsl-SQL, 복잡한 통합 조회는 MyBatis로 — 한 번의 선택으로 끝내지 않고 한계가 보일 때마다 다시 판단한 과정 자체가, 개인의 해결을 넘어 팀의 쿼리 작성 기준이 됐습니다.</p>
+    </div>
+  </section>
+
+  <!-- CASE 4 -->
+  <section class="case">
+    <div class="head">
+      <div class="case-no">Case 04</div>
+      <h2>실시간 운영 대시보드</h2>
+    </div>
+    <p style="font-size:16.5px;color:var(--ink);font-weight:500;margin-bottom:24px">여러 페이지에 흩어져 있던 운영 데이터를, 데이터 성격에 맞는 갱신 전략을 설계해 <b>단일 실시간 대시보드</b>로 통합한 작업입니다.</p>
+
+    <h3>문제 상황</h3>
+    <p>기존 백오피스에 거래 내역, 키오스크 상태, 환율·스프레드 데이터가 다 있긴 했지만 각 정보가 별도 페이지에 흩어져 있었습니다. 데이터는 있는데 <b>한눈에 볼 화면이 없다 보니</b>, 재무팀이 매일 다음을 반복했습니다.</p>
+    <ul class="case-list">
+      <li><b>1. 페이지 순차 진입</b><span>백오피스 여러 페이지에 순차로 들어가 데이터 확인.</span></li>
+      <li><b>2. 다축 조회 · 다운로드</b><span>일별·통화별·국가별·키오스크별 거래 내역을 각각 조회·다운로드.</span></li>
+      <li><b>3. 엑셀 가공</b><span>받은 엑셀을 가공·조합해 일일 리포트로 정리.</span></li>
+      <li><b>4. 이메일 발송</b><span>정리된 리포트를 이메일로 사내 발송.</span></li>
+    </ul>
+    <p>리포트는 매일 만들어졌지만 <b>실시간성이 없다는 게 가장 큰 한계</b>였습니다. 운영 중 이슈가 생기면 결국 백오피스를 다시 열어 여러 페이지를 오가며 확인해야 했습니다.</p>
+
+    <h3>해결 과정</h3>
+    <p>기획팀과 함께 사용자별(재무팀·운영팀·경영진) 정보 니즈를 정리하고, <b>어떤 데이터가 한 화면에 같이 있어야 의미가 있는지</b>부터 정의했습니다. 화면 기획(Figma) 단계에서 필요한 데이터 흐름을 함께 잡고, 그에 맞춰 조회·집계 구조를 설계한 뒤 도메인 단위로 영역을 구성했습니다.</p>
+    <ul class="case-list">
+      <li><b>갱신 방식 이원화</b><span>데이터 성격에 따라 <b>푸시와 폴링을 나눴습니다</b>. 발생 시점을 예측할 수 없고 즉시 반영이 필요한 키오스크 상태 변경·시재 변경 알림은 <b>WebSocket으로 푸시받는 구조</b>로 갔습니다. 단말과 직접 통신하는 파트가 통신 결과를 DB에 적재하는 시점에 대시보드용 웹소켓으로도 현황을 함께 내려주도록 연동하고, 대시보드 측에서는 이 웹소켓을 구독해 신규 이벤트가 생기면 실시간으로 화면에 반영했습니다.</span></li>
+      <li><b>폴링으로 실시간 현황 갱신</b><span>거래 현황처럼 지속적으로 갱신되는 데이터는 화면에서 <b>10초 주기로 API를 폴링</b>해 실시간성을 확보했습니다. 짧은 주기로 인한 서버 부하는 폴링 자체를 줄이는 대신, 아래의 캐싱 전략으로 제어했습니다.</span></li>
+      <li><b>캐싱으로 폴링 부하 제어</b><span>폴링은 주기적으로 호출되다 보니 같은 데이터를 반복 조회하는 부담이 있었습니다. 그래서 응답을 캐싱하되, <b>캐시 키를 '거래 유형 + 거래일 + 해당 유형의 최신 거래 ID'</b>로 구성했습니다. 핵심은 키에 <b>최신 거래 ID</b>를 포함시킨 것입니다. 새 거래가 들어오면 최신 거래 ID가 바뀌어 <b>키 자체가 달라지므로 자연스럽게 캐시 미스가 나 DB를 새로 조회</b>하고, 새 거래가 없으면 같은 키로 캐시된 응답을 그대로 반환합니다. 별도의 무효화(evict) 로직 없이 <em>키 설계만으로 '데이터가 바뀌었을 때만 갱신'을 구현</em>한 것으로, 짧은 폴링 주기에도 실제 DB 조회는 거래가 실제로 발생한 경우로만 한정했습니다.</span></li>
+    </ul>
+    <p>이렇게 구성한 화면에 <em>거래 유형별 실시간 현황</em>(원화·외화 거래, 카드 구매·충전·출금, 택스리펀드), 전국 키오스크 상태·알림, 경쟁사 환율 비교를 통합해, 같은 "거래"지만 성격이 다른 흐름을 직관적으로 분리해 볼 수 있게 했습니다.</p>
+
+    <div class="code">
+      <div class="cap">캐시 키 설계 — 최신 거래 ID를 키에 포함해 자동 무효화</div>
+<pre><span class="cm">// 키에 최신 거래 ID를 포함 → 새 거래가 생기면 키가 바뀌어 자동으로 새로 조회</span>
+<span class="cm">// (max id를 빼면 키가 '유형:일자'로 고정돼 그날의 실시간 현황이 갱신되지 않음)</span>
+@Cacheable(
+  cacheNames = [<span class="st">"dashboardByDay"</span>],
+  key = <span class="st">"#type + ':' + #dueDate + ':' + @txRepository.findMaxIdByType(#type)"</span>
+)
+<span class="kw">fun</span> getDashboard(type: TxType, dueDate: LocalDate): DashboardView
+
+<span class="cm">// 해당 유형의 최신 거래 1건 id — 거래가 들어올 때마다 값이 커진다</span>
+@Query(<span class="st">"... ORDER BY trans.id DESC LIMIT 1"</span>)
+<span class="kw">fun</span> findMaxIdByType(type: TxType): Long?</pre>
+    </div>
+
+    <div class="outcome">
+      <p>재무팀의 리포트 가공·발송 업무가 크게 줄었고, <em>의사결정자가 메일을 기다리지 않고 필요한 순간에 직접 대시보드를 열어 상황을 확인</em>할 수 있게 됐습니다.</p>
+      <div class="metric"><span>다회 진입·엑셀 가공·메일 → 단일 화면</span><span>키 설계로 캐시 무효화 해결</span><span>폴링 부하: 거래 발생 시로 한정</span></div>
+    </div>
+
+    <div class="reflect">
+      <p>'실시간'이 모든 데이터에 같은 방식으로 필요한 건 아니라는 걸 배웠습니다. <b>즉시성이 필요한 이벤트는 푸시, 주기로 충분한 통계는 폴링</b>으로 나누고, 폴링의 반복 조회 부담은 <b>캐시 키에 최신 거래 ID를 포함시키는 설계</b>로 풀었습니다. 복잡한 무효화 로직 대신 키 설계만으로 '데이터가 바뀌면 자동 갱신'을 구현할 수 있다는 점에서, <b>문제를 단순하게 푸는 방법</b>을 고민하게 된 경험이었습니다.</p>
     </div>
   </section>
 
