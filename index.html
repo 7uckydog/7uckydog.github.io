@@ -190,10 +190,11 @@
   }
   .about .headline em{font-style:normal;color:var(--accent);font-weight:700}
   .about .quote{
-    margin-top:24px;padding:20px 24px;border-left:3px solid var(--accent);
+    margin-top:24px;padding:22px 26px;border-left:3px solid var(--accent);
     background:var(--paper);border-radius:0 12px 12px 0;
-    font-size:15.5px;line-height:1.65;color:var(--ink);font-weight:500;max-width:840px;
+    font-size:15.5px;line-height:1.85;color:var(--ink);font-weight:500;max-width:760px;
     box-shadow:0 1px 0 var(--line-2);
+    text-wrap:pretty;
   }
   .about .quote em{font-style:normal;color:var(--accent);font-weight:700}
 
@@ -382,20 +383,22 @@
     .about .quote{font-size:9.5pt;padding:10pt 14pt;margin-top:10pt}
 
     /* Experience rows */
-    .row{grid-template-columns:90pt 1fr;gap:18pt;padding:10pt 0;break-inside:auto}
-    .row .meta{font-size:9pt}
-    .row .meta .dur{font-size:9pt}
-    .row .meta .tag{font-size:7.5pt;padding:2px 6px;margin-top:4pt}
-    .row .body h3{font-size:12pt;margin-bottom:2pt;page-break-after:avoid;break-after:avoid}
+    .row{display:block;padding:10pt 0;break-inside:auto;page-break-inside:auto}
+    .row .meta{display:inline-block;width:auto;font-size:9pt;margin-bottom:4pt}
+    .row .meta .dur{display:inline;font-size:9pt;margin-right:8pt}
+    .row .meta > span{display:inline;margin-right:8pt}
+    .row .meta .tag{font-size:7.5pt;padding:2px 6px;margin-top:0;display:inline-block}
+    .row .body{display:block}
+    .row .body h3{font-size:12pt;margin-bottom:2pt}
     .row .body h3 .ext{font-size:8pt}
-    .row .body .role{font-size:9.5pt;margin-bottom:6pt;page-break-after:avoid}
+    .row .body .role{font-size:9.5pt;margin-bottom:6pt}
     .row .body .lead{font-size:9.5pt;margin-bottom:8pt}
-    .block{margin-top:8pt}
+    .block{margin-top:8pt;page-break-inside:auto;break-inside:auto}
     .block h4{font-size:10pt;margin-bottom:5pt;page-break-after:avoid;break-after:avoid}
     .block ul{gap:3pt}
-    .block ul li{font-size:9pt;line-height:1.5;padding-left:11pt;page-break-inside:avoid;break-inside:avoid}
+    .block ul li{font-size:9pt;line-height:1.5;padding-left:11pt;page-break-inside:auto;break-inside:auto}
     .block ul li::before{top:6pt;width:7pt}
-    .block ul ul li{font-size:8.5pt}
+    .block ul ul li{font-size:8.5pt;page-break-inside:avoid;break-inside:avoid}
     .block ul ul li::before{top:6pt;width:5pt}
 
     /* Projects: 2-col grid, cards don't break */
@@ -442,6 +445,7 @@
 
 <div class="toolbar" role="toolbar" aria-label="page tools">
   <button id="theme-btn" type="button">Theme</button>
+  <button id="print-btn" class="pdf-btn" type="button">PDF 저장 ↓</button>
 </div>
 
 <main class="page">
@@ -466,7 +470,7 @@
       <div><span class="k">Email</span><a class="v email-link" data-user="dbqls7781" data-domain="gmail.com" href="#" target="_blank" rel="noopener">loading…</a></div>
       <div><span class="k">Phone</span><a class="v" href="tel:+821082877781">010-8287-7781</a></div>
       <div><span class="k">GitHub</span><a class="v" href="https://github.com/7uckydog" target="_blank" rel="noopener">github.com/7uckydog</a></div>
-      <div><span class="k">Detail</span><a class="v" href="dozn-detail.html">상세 경력기술서 →</a></div>
+      <div><span class="k">Detail</span><a class="v" href="dozn-detail.html">상세 경력기술서</a></div>
     </div>
   </header>
 
@@ -480,7 +484,9 @@
       <h3 class="headline" style="font-size: 22px">디자이너의 눈으로<br><em style="font-size: 22px">시스템을 설계합니다.</em></h3>
       <p><b>Spring & Kotlin</b> 기반의 환전 및 현금 거래 관련 백오피스 고도화와 신규 서비스에 따른 기능 개발을 담당하고 있습니다. 기존 백오피스에 신규 기능 및 성능 보완을 진행하며 리팩토링에 거침없으며, 키오스크 내 지속적인 신규 거래 유형이 추가됨에 따라 빠른 환경 적응 및 플로우 파악에 익숙해져 있습니다.</p>
       <p>시각디자인을 전공함으로써 <b>UI/UX 감각</b>을 갖추고 있어, 기획자·디자이너와의 소통이 유연하며 다양한 관점에서 기능을 살피는 시야를 가지고 있습니다.</p>
-      <div class="quote">“코드를 짜기 전에 흐름을 깎아냅니다. <br> 사용자의 동선이 단순해질 때까지 줄이고 나면 그 뒤의 데이터 구조도 자연스럽게 단단해지고, <br>운영하는 사람의 손도 가벼워집니다. <br>단순함은 만드는 사람의 게으름이 아니라, 오래 갈 시스템을 위한 가장 어려운 의사결정이라고 믿습니다.”</div>
+      <div class="quote">“코드를 짜기 전에 흐름을 깍아냅니다.<br>
+사용자의 동선이 단순해질 때까지 줄이고 나면 그 뒤의 데이터 구조도 자연스럽게 단단해지고, 운영하는 사람의 손도 가볼워집니다.<br>
+단순함은 만드는 사람의 게으름이 아니라, 오래 갈 시스템을 위한 가장 어려운 <em>의사결정</em>이라고 믿습니다.”</div>
     </div>
   </section>
 
@@ -813,6 +819,7 @@
   });
 
   // Reveal-on-scroll for sections, cards, and section heads
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
   const targets = document.querySelectorAll('section, .proj-card, .edu-card, .sec-head, .row');
   targets.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {
